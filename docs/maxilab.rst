@@ -10,8 +10,4 @@ This is Maxilab.
 Contents
 --------
 
-.. toctree::
 
-   minilab1
-   minilab2
-   maxilab
