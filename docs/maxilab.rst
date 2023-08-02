@@ -17,7 +17,7 @@ where :math:`\mu_0 = 4\pi \cdot 10^{-6} \,{\rm kG\,cm\,A^{-1} }` is the magnetic
 
     \mathcal{I} = \frac{\int \left(\frac{N}{r}\right)^3 \frac{dr}{\rho}}{\int \frac{N}{r}dr},~~~~~~~~~~~(2)
 
-where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
+where :math:`N` is the Brunt-Väisälä frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
 
 The denominator in the integral relates to the asymptotic period spacing of modes with spherical degree :math:`\ell = 1` as follows,
 
