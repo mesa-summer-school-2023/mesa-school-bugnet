@@ -106,7 +106,9 @@ First, define two quantities in which you store the values of the two integrals.
 where ``delta(k)`` is the function we want to integrate (:math:`x_i \Delta x_i`). Remember :math:`k=1` is the outermost cell.
 In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals.
 
-Hint: In ``star_info``, ``s\% r`` is defined at the cell edge, while ``s% rmid`` is defined at the centre.
+.. details::
+   :summary: Hint: In ``star_info``, ``s% r`` is defined at the cell edge, while ``s% rmid`` is defined at the centre.
+
 
 Once you have computed ``\mathcal{I}``, write this value out to the first extra column in history.
 
