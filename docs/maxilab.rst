@@ -9,13 +9,17 @@ In this Maxilab, we are going to infer the internal magnetic field of the red gi
 
 .. math::
 
-    \left< B_r^2\right> = \frac{\mu_0 \delta \omega_g (2 \pi \nu_{\rm max})^3}{\mathcal{I}},
+    \begin{equation}
+    \left< B_r^2\right> = \frac{\mu_0 \delta \omega_g (2 \pi \nu_{\rm max})^3}{\mathcal{I}}, \label{eq:B}
+    \end{equation}
 
 where :math:`\mu_0 = 4\pi \cdot 10^{-6} \,{\rm kG\,cm\,A^{-1} }` is the magnetic permeability in vacuum, :math:`\delta \omega_g` is the observed frequency shift of the g modes, and :math:`\nu_{\rm max}` is the frequency of maximum power. The factor :math:`\mathcal{I}` in the denominator is defined as,
 
 .. math::
 
-    \mathcal{I} = \frac{\int \left(\frac{N}{r}\right)^3 \frac{dr}{\rho}}{\int \frac{N}{r}dr},
+    \begin{equation}
+    \mathcal{I} = \frac{\int \left(\frac{N}{r}\right)^3 \frac{dr}{\rho}}{\int \frac{N}{r}dr}, \label{eq:I}
+    \end{equation}
 
 where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
 
@@ -23,7 +27,9 @@ The denominator in the integral relates to the asymptotic period spacing of mode
 
 .. math::
 
-    \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}. 
+    \begin{equation}
+    \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}. \label{eq:Pi}
+    \end{equation}
 
 We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the ``run_star_extras.f90``. 
 
