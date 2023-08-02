@@ -53,7 +53,7 @@ Do a ``./clean`` and ``./mk`` and check this works.
 
 Exercise 2
 --------
-The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
+The first step is to compute the two integrals in Eq :math:`(\ref{eq:I})`. For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
 
 .. code:: fortran
 
