@@ -27,7 +27,7 @@ We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the 
 
 Exercise 0 
 --------
-As a first step, copy the work directory over and verify it runs. 
+As a first step, copy the work directory over. 
 
 At each step of the evolution we want to compute :math:`\left< B_r^2\right>^{1/2}` and store it in the output of the history file. 
 
