@@ -167,45 +167,45 @@ Pick a value for the initial mass from the spreadsheet and note down the lowest 
     The part where you compute and add the additional history columns should look something like this.
     .. code:: fortran
 
-            subroutine data_for_extra_history_columns(id, n, names, vals, ierr)
-               integer, intent(in) :: id, n
-               character (len=maxlen_history_column_name) :: names(n)
-               real(dp) :: vals(n), integral_N, integral_N3, I, mu_0, Br_mean
-               integer, intent(out) :: ierr
-               type (star_info), pointer :: s
-               double precision, allocatable :: brunt_N(:)
-               integer :: k
-               ierr = 0
-               call star_ptr(id, s, ierr)
-               if (ierr /= 0) return
-               mu_0 = 4d-6*pi
-    
-               ! note: do NOT add the extras names to history_columns.list
-               ! the history_columns.list is only for the built-in history column options.
-               ! it must not include the new column names you are adding here.
-    
-    
-               allocate(brunt_N(s% nz))
-               names(1) = 'I'
-               names(2) = 'Br_mean'
-               names(3) = 'Delta_Pi1'
-               brunt_N = sqrt(max(0._dp,s% brunt_N2))
-               integral_N3 = 0.0_dp
-               integral_N = 0.0_dp
-               do k = 1, s%nz-1
-                 integral_N3 = integral_N3 + (brunt_N(k)**3/(s% rho(k)))*abs(s% rmid(k+1) - s% rmid(k)) / (s% r(k))**3
-                 integral_N  = integral_N + brunt_N(k)*abs(s% rmid(k+1) - s% rmid(k)) / s% r(k)
-               end do
-               I = integral_N3 / integral_N
-               vals(1) = I
-               omega_max = 2 * pi * s% nu_max * 1d-6
-               Br_mean = sqrt(mu_0 * (2*pi*delta_omega_g*1d-9) * omega_max**3 / I) ! In kG.
-               vals(2) = Br_mean
-               Delta_Pi1 = (2._dp*pi**2)/integral_N / (sqrt(2._dp))
-               vals(3) = Delta_Pi1
-               write(*,*) 'Br_mean [kG] = ', Br_mean, 'Delta_Pi1 [s] = ', Delta_Pi1, 'nu_max [uHz] = ', s% nu_max, 'delta_nu [uHz]', s% delta_nu,   'I = ', I
-               chi2 = (Delta_Pi1 - s% x_ctrl(2))**2 + (s% nu_max - s% x_ctrl(3))**2
-               write(*,*) 'chi2', chi2
-               deallocate(brunt_N)
-    
-            end subroutine data_for_extra_history_columns
+        subroutine data_for_extra_history_columns(id, n, names, vals, ierr)
+           integer, intent(in) :: id, n
+           character (len=maxlen_history_column_name) :: names(n)
+           real(dp) :: vals(n), integral_N, integral_N3, I, mu_0, Br_mean
+           integer, intent(out) :: ierr
+           type (star_info), pointer :: s
+           double precision, allocatable :: brunt_N(:)
+           integer :: k
+           ierr = 0
+           call star_ptr(id, s, ierr)
+           if (ierr /= 0) return
+           mu_0 = 4d-6*pi
+
+           ! note: do NOT add the extras names to history_columns.list
+           ! the history_columns.list is only for the built-in history column options.
+           ! it must not include the new column names you are adding here.
+
+
+           allocate(brunt_N(s% nz))
+           names(1) = 'I'
+           names(2) = 'Br_mean'
+           names(3) = 'Delta_Pi1'
+           brunt_N = sqrt(max(0._dp,s% brunt_N2))
+           integral_N3 = 0.0_dp
+           integral_N = 0.0_dp
+           do k = 1, s%nz-1
+             integral_N3 = integral_N3 + (brunt_N(k)**3/(s% rho(k)))*abs(s% rmid(k+1) - s% rmid(k)) / (s% r(k))**3
+             integral_N  = integral_N + brunt_N(k)*abs(s% rmid(k+1) - s% rmid(k)) / s% r(k)
+           end do
+           I = integral_N3 / integral_N
+           vals(1) = I
+           omega_max = 2 * pi * s% nu_max * 1d-6
+           Br_mean = sqrt(mu_0 * (2*pi*delta_omega_g*1d-9) * omega_max**3 / I) ! In kG.
+           vals(2) = Br_mean
+           Delta_Pi1 = (2._dp*pi**2)/integral_N / (sqrt(2._dp))
+           vals(3) = Delta_Pi1
+           write(*,*) 'Br_mean [kG] = ', Br_mean, 'Delta_Pi1 [s] = ', Delta_Pi1, 'nu_max [uHz] = ', s% nu_max, 'delta_nu [uHz]', s% delta_nu,   'I = ', I
+           chi2 = (Delta_Pi1 - s% x_ctrl(2))**2 + (s% nu_max - s% x_ctrl(3))**2
+           write(*,*) 'chi2', chi2
+           deallocate(brunt_N)
+
+        end subroutine data_for_extra_history_columns
