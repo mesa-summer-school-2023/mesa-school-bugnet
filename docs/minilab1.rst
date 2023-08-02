@@ -12,5 +12,6 @@ Contents
 
 .. toctree::
 
-   usage
-   api
+   minilab1
+   minilab2
+   maxilab
