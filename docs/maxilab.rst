@@ -44,4 +44,118 @@ Prepare in the ``run_star_extras.f90`` three additional history columns named ``
 You can set the values to 0 for now.
 Do a ``./clean`` and ``./mk`` and check this works.
 
+Exercise 2
+--------
+The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt-V\"ais\"al\"a frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements ``\geq 0``. A new array of a variable length is defined as follows,
+
+.. code::
+
+double precision, allocatable :: brunt_N(:)
+
+allocate(brunt_N(s% nz))
+
+This defines an array with the same length as the number of cells at each time step.
+Here, the declaration of the (double precision) variable goes right below the ``subroutine``statement, and the allocate statement after all other variable declarations and the call to the ``star_info`` structure has been made. These are the lines
+
+.. code::
+
+call star_ptr(id,s,ierr)
+if(ierr/=0) return
+
+We can then access variables part of the ``star_info`` structure such as the radius, density, and the squared Brunt-V\"ais\"al\"a frequency (``N^2``)
+
+.. code::
+
+s% r
+s% rho
+s% brunt_N2
+
+You can check out ``MESA_DIR/star_data/public/star_data_work.inc`` to see what variables are accessible this way.
+Moreover, ``s\% r(k)`` will give you the k-th element of the array.
+
+ Compute ``N`` from the values of ``N^2`` defined in MESA, but set negative values to zero.
+
+ .. code::
+
+sqrt(max(0._dp, s% brunt_N2))
+
+In Fortran, the function ``max()`` will element-wise return the larger element of the two arguments. The ``_dp`` indicates we are dealing with double precision here.
+ At the end of the subroutine, you can deallocate the array to free up memory.
+
+.. code::
+
+deallocate(brunt_N)
+
+
+ If your model has a high enough spatial resolution, you can assume,
+
+.. math::
+
+    \int x\,{\rm d}x \approx \sum_i x_i\,\Delta x_i,
+
+where the index ``i`` runs over the cells.
+First, define two quantities in which you store the values of the two integrals. For the summation (integral), you will have to something like
+
+.. code::
+
+sum = 0._dp
+do k = 1, s% nz-1
+  sum = sum + delta(k)
+end do
+
+where ``delta(k)`` is the function we want to integrate (``x_i \Delta x_i``). Remember ``k=1`` is the outermost cell.
+In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals.
+
+Hint: In ``star_info}, ``s\% r`` is defined at the cell edge, while ``s\% rmid`` is defined at the centre.
+
+Once you have computed ``\mathcal{I}``, write this value out to the first extra column in history.
+
+Exercise 3
+--------
+Next, we want to pass on the value of ``\delta \omega_g`` to the ``run_star_extras.f90``. In your inlist, you can set
+
+.. code::
+
+    x_ctrl(1) = ...
+
+to a value that you can then access in the ``run_star_extras.f90`` through,
+
+.. code::
+
+    s% x_ctrl(1)
+
+Add a control in your inlist to do this. The observed value for KIC11515377 is ``\delta \omega_g / (2 \pi) = 126\,``nHz. The value of ``\nu_{\rm max}`` you can get from ``star_info}. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc``you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
+
+Finally, write ``\left< B_r^2\right>^{1/2}`` and ``\Delta \Pi_1`` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100\,kG.
+
+Exercise 4
+--------
+Finally, we want to stop the evolution when the model has roughly reached the observed values of ``\nu_{\rm max, obs} = 191.6 \pm 1\,\mu{\rm Hz}`` and ``\Delta \Pi_{\rm 1, obs} = 83.16 \pm 1\,{\rm s}``. Add two additional controls to your inlist to pass these two values on to the ``run_star_extras.f90`` and define
+
+.. math::
+
+   \chi^2 = (\nu_{\rm max} - \nu_{\rm max, obs})^2 + (\Delta \Pi_1 - \Delta \Pi_{1, \rm obs})^2.
+
+Change the inlist to start the evolution from the zero-age main sequence instead of loading in a precomputed RGB model. Be sure to properly set the initial composition by setting
+
+.. code::
+
+      set_uniform_initial_composition = .true.
+
+Once on the RGB, after each time step, check whether the ``\chi^2`` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of ``\chi^2``. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none}. Now, in ``data_for_extra_history_columns`` you can set the value of ``\chi2``.
+In addition, also define a global variable which stores the previous value of ``\chi^2``. For the first time step, we need to initialise this variable to a large value (e.g. 1e99).
+
+.. code::
+
+    chi2_old = 1d99
+
+Have a look at the flowchart in Fig.~\ref{fig:flowchart} and see which subroutine is only called once at the start of a run.
+Lastly, check in the flowchart where MESA decides to keep going or terminate. Here, add a condition that will terminate the run if the new ``\chi^2`` is larger than the previous value. Else, update the previous value to the new one. To make sure we are on the RG branch, add the following second condition
+
+.. code::
+
+    safe_log10(s% Teff) < 3.7
+
+Add to your PGstar inlist the target values, so that you can see how close your models gets to the observations. To do this, have a look at the controls in ``inlist_pgstar`` that are currently commented out.
+Pick a value for the initial mass from the spreadsheet and note down the lowest found ``\chi^2`` value and the corresponding value of the internal magnetic field (in kG).
 
