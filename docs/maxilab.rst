@@ -19,7 +19,7 @@ where :math:`\mu_0 = 4\pi \cdot 10^{-6} \,{\rm kG\,cm\,A^{-1} }` is the magnetic
 
 where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
 
-The denominator in the integral relates to the asymptotic period spacing of modes with spherical degree :math:`ell = 1` as follows,
+The denominator in the integral relates to the asymptotic period spacing of modes with spherical degree :math:`\ell = 1` as follows,
 
 .. math::
 
@@ -106,9 +106,9 @@ First, define two quantities in which you store the values of the two integrals.
 where ``delta(k)`` is the function we want to integrate (:math:`x_i \Delta x_i`). Remember :math:`k=1` is the outermost cell.
 In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals.
 
-.. details::
+.. collapse:: Hint
 
-   :summary: Hint: In ``star_info``, ``s% r`` is defined at the cell edge, while ``s% rmid`` is defined at the centre.
+   In ``star_info``, ``s% r`` is defined at the cell edge, while ``s% rmid`` is defined at the centre.
 
 
 Once you have computed :math:`\mathcal{I}`, write this value out to the first extra column in history.
