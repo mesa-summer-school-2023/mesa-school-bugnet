@@ -1,4 +1,4 @@
-Maxilab
+Maxilab: Measuring the magnetic field
 ===================================
 
 Contents
