@@ -113,6 +113,10 @@ In MESA, there are quantities that are defined at the mass centre of the cell, a
 
 Once you have computed :math:`\mathcal{I}`, write this value out to the first extra column in history.
 
+.. tip::
+
+   If you are really stuck, have a look to part of the solutions at the bottom of this page.
+    
 Exercise 3
 --------
 Next, we want to pass on the value of :math:`\delta \omega_g` to the ``run_star_extras.f90``. In your inlist, you can set
