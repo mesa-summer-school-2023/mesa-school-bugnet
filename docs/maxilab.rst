@@ -4,7 +4,7 @@ Maxilab
 Contents
 --------
 
-Under the influence of rotation, pulsation modes with the same spherical degree, $\ell$, (number of surface nodal lines), split into multiplets :math:`m = -\ell, -(\ell-1), ..., \ell-1, \ell` where the azimuthal order :math:`m` indicates the number of surface nodal lines intersecting the rotational axis. On top of that, the presence of a magnetic field in the core can introduce asymmetries in the splittings (difference in frequency) of these pulsation modes. 
+Under the influence of rotation, pulsation modes with the same spherical degree, :math:`\ell`, (number of surface nodal lines), split into multiplets :math:`m = -\ell, -(\ell-1), ..., \ell-1, \ell` where the azimuthal order :math:`m` indicates the number of surface nodal lines intersecting the rotational axis. On top of that, the presence of a magnetic field in the core can introduce asymmetries in the splittings (difference in frequency) of these pulsation modes. 
 In this Maxilab, we are going to infer the internal magnetic field of the red giant (RG) KIC11515377, observed with the NASA Kepler mission. We follow the methodology of Li et al. (2022, Nature).  The squared radial magnetic field averaged in the horizontal direction is inferred by,
 
 .. math::
@@ -35,7 +35,7 @@ At each step of the evolution we want to compute :math:`\left< B_r^2\right>^{1/2
 
 Exercise 1 
 --------
-Prepare in the ``run_star_extras.f90`` three additional history columns named ``I``, ``Br_mean``, and ``Delta\_Pi1``. Set the correct number of additional columns in the ``how_many_extra_history_columns`` function, and add the following to ``data_for_extra_history_columns`` for each additional column,
+Prepare in the ``run_star_extras.f90`` three additional history columns named ``I``, ``Br_mean``, and ``Delta_Pi1``. Set the correct number of additional columns in the ``how_many_extra_history_columns`` function, and add the following to ``data_for_extra_history_columns`` for each additional column,
 
 .. code-block:: console
 
@@ -47,7 +47,7 @@ Do a ``./clean`` and ``./mk`` and check this works.
 
 Exercise 2
 --------
-The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt-V\"ais\"al\"a frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements ``\geq 0``. A new array of a variable length is defined as follows,
+The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt-V\"ais\"al\"a frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements ``> 0``. A new array of a variable length is defined as follows,
 
 .. code:: fortran
 
@@ -56,14 +56,14 @@ The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt
     allocate(brunt_N(s% nz))
 
 This defines an array with the same length as the number of cells at each time step.
-Here, the declaration of the (double precision) variable goes right below the ``subroutine``statement, and the allocate statement after all other variable declarations and the call to the ``star_info`` structure has been made. These are the lines
+Here, the declaration of the (double precision) variable goes right below the ``subroutine`` statement, and the allocate statement after all other variable declarations and the call to the ``star_info`` structure has been made. These are the lines
 
 .. code:: fortran
 
     call star_ptr(id,s,ierr)
     if(ierr/=0) return
 
-We can then access variables part of the ``star_info`` structure such as the radius, density, and the squared Brunt-V\"ais\"al\"a frequency (``N^2``)
+We can then access variables part of the ``star_info`` structure such as the radius, density, and the squared Brunt-V\"ais\"al\"a frequency (:math:``N^2``)
 
 .. code:: console
 
@@ -74,7 +74,7 @@ We can then access variables part of the ``star_info`` structure such as the rad
 You can check out ``MESA_DIR/star_data/public/star_data_work.inc`` to see what variables are accessible this way.
 Moreover, ``s\% r(k)`` will give you the k-th element of the array.
 
-Compute ``N`` from the values of ``N^2`` defined in MESA, but set negative values to zero.
+Compute :math:`N` from the values of :math:`N^2` defined in MESA, but set negative values to zero.
 
 .. code:: console
 
@@ -93,7 +93,7 @@ If your model has a high enough spatial resolution, you can assume,
 
     \int x\,{\rm d}x \approx \sum_i x_i\,\Delta x_i,
 
-where the index ``i`` runs over the cells.
+where the index :math:`i` runs over the cells.
 First, define two quantities in which you store the values of the two integrals. For the summation (integral), you will have to something like
 
 .. code:: fortran
@@ -103,16 +103,16 @@ First, define two quantities in which you store the values of the two integrals.
       sum = sum + delta(k)
     end do
 
-where ``delta(k)`` is the function we want to integrate (``x_i \Delta x_i``). Remember ``k=1`` is the outermost cell.
+where ``delta(k)`` is the function we want to integrate (:math:`x_i \Delta x_i`). Remember :math:`k=1` is the outermost cell.
 In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals.
 
-Hint: In ``star_info}, ``s\% r`` is defined at the cell edge, while ``s\% rmid`` is defined at the centre.
+Hint: In ``star_info``, ``s\% r`` is defined at the cell edge, while ``s% rmid`` is defined at the centre.
 
 Once you have computed ``\mathcal{I}``, write this value out to the first extra column in history.
 
 Exercise 3
 --------
-Next, we want to pass on the value of ``\delta \omega_g`` to the ``run_star_extras.f90``. In your inlist, you can set
+Next, we want to pass on the value of :math:`\delta \omega_g` to the ``run_star_extras.f90``. In your inlist, you can set
 
 .. code:: console
 
@@ -124,13 +124,13 @@ to a value that you can then access in the ``run_star_extras.f90`` through,
 
     s% x_ctrl(1)
 
-Add a control in your inlist to do this. The observed value for KIC11515377 is ``\delta \omega_g / (2 \pi) = 126\,``nHz. The value of ``\nu_{\rm max}`` you can get from ``star_info}. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc``you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
+Add a control in your inlist to do this. The observed value for KIC11515377 is ``\delta \omega_g / (2 \pi) = 126\,``nHz. The value of ``\nu_{\rm max}`` you can get from ``star_info``. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc``you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
 
-Finally, write ``\left< B_r^2\right>^{1/2}`` and ``\Delta \Pi_1`` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100\,kG.
+Finally, write :math:`\left< B_r^2\right>^{1/2}` and :math:`\Delta \Pi_1` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100 kG.
 
 Exercise 4
 --------
-Finally, we want to stop the evolution when the model has roughly reached the observed values of ``\nu_{\rm max, obs} = 191.6 \pm 1\,\mu{\rm Hz}`` and ``\Delta \Pi_{\rm 1, obs} = 83.16 \pm 1\,{\rm s}``. Add two additional controls to your inlist to pass these two values on to the ``run_star_extras.f90`` and define
+Finally, we want to stop the evolution when the model has roughly reached the observed values of :math:`\nu_{\rm max, obs} = 191.6 \pm 1\,\mu{\rm Hz}` and :math:`\Delta \Pi_{\rm 1, obs} = 83.16 \pm 1\,{\rm s}`. Add two additional controls to your inlist to pass these two values on to the ``run_star_extras.f90`` and define
 
 .. math::
 
@@ -142,20 +142,20 @@ Change the inlist to start the evolution from the zero-age main sequence instead
 
     set_uniform_initial_composition = .true.
 
-Once on the RGB, after each time step, check whether the ``\chi^2`` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of ``\chi^2``. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none}. Now, in ``data_for_extra_history_columns`` you can set the value of ``\chi2``.
-In addition, also define a global variable which stores the previous value of ``\chi^2``. For the first time step, we need to initialise this variable to a large value (e.g. 1e99).
+Once on the RGB, after each time step, check whether the :math:`\chi^2` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of :math:`\chi^2`. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none``. Now, in ``data_for_extra_history_columns`` you can set the value of :math:`\chi2`.
+In addition, also define a global variable which stores the previous value of :math:`\chi^2`. For the first time step, we need to initialise this variable to a large value (e.g. 1e99).
 
 .. code:: console
 
     chi2_old = 1d99
 
 Have a look at the flowchart in Fig.~\ref{fig:flowchart} and see which subroutine is only called once at the start of a run.
-Lastly, check in the flowchart where MESA decides to keep going or terminate. Here, add a condition that will terminate the run if the new ``\chi^2`` is larger than the previous value. Else, update the previous value to the new one. To make sure we are on the RG branch, add the following second condition
+Lastly, check in the flowchart where MESA decides to keep going or terminate. Here, add a condition that will terminate the run if the new :math:`\chi^2` is larger than the previous value. Else, update the previous value to the new one. To make sure we are on the RG branch, add the following second condition
 
 .. code:: console
 
     safe_log10(s% Teff) < 3.7
 
 Add to your PGstar inlist the target values, so that you can see how close your models gets to the observations. To do this, have a look at the controls in ``inlist_pgstar`` that are currently commented out.
-Pick a value for the initial mass from the spreadsheet and note down the lowest found ``\chi^2`` value and the corresponding value of the internal magnetic field (in kG).
+Pick a value for the initial mass from the spreadsheet and note down the lowest found :math:`\chi^2` value and the corresponding value of the internal magnetic field (in kG).
 
