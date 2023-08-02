@@ -72,7 +72,7 @@ We can then access variables part of the ``star_info`` structure such as the rad
     s% brunt_N2
 
 You can check out ``MESA_DIR/star_data/public/star_data_work.inc`` to see what variables are accessible this way.
-Moreover, ``s\% r(k)`` will give you the k-th element of the array.
+Moreover, ``s% r(k)`` will give you the k-th element of the array.
 
 Compute :math:`N` from the values of :math:`N^2` defined in MESA, but set negative values to zero.
 
