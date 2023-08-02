@@ -164,6 +164,8 @@ Pick a value for the initial mass from the spreadsheet and note down the lowest 
 
 .. image:: flowchart_run_star_extras.png
    :alt: Flowchart
+   :width: 1275
+   :height: 1650
    :scale: 100%
    :align: left
 
