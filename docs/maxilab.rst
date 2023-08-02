@@ -8,15 +8,15 @@ Under the influence of rotation, pulsation modes with the same spherical degree,
 In this Maxilab, we are going to infer the internal magnetic field of the red giant (RG) KIC11515377, observed with the NASA Kepler mission. We follow the methodology of Li et al. (2022, Nature).  The squared radial magnetic field averaged in the horizontal direction is inferred by,
 
 .. math::
+    :name: eq:B
 
-    :label: eq:B
     \left< B_r^2\right> = \frac{\mu_0 \delta \omega_g (2 \pi \nu_{\rm max})^3}{\mathcal{I}},
 
 where :math:`\mu_0 = 4\pi \cdot 10^{-6} \,{\rm kG\,cm\,A^{-1} }` is the magnetic permeability in vacuum, :math:`\delta \omega_g` is the observed frequency shift of the g modes, and :math:`\nu_{\rm max}` is the frequency of maximum power. The factor :math:`\mathcal{I}` in the denominator is defined as,
 
 .. math::
+    :name: eq:I
 
-    :label: eq:I
     \mathcal{I} = \frac{\int \left(\frac{N}{r}\right)^3 \frac{dr}{\rho}}{\int \frac{N}{r}dr},
 
 where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
@@ -24,8 +24,8 @@ where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the densit
 The denominator in the integral relates to the asymptotic period spacing of modes with spherical degree :math:`\ell = 1` as follows,
 
 .. math::
+    :name: eq:Pi
 
-    :label: eq:Pi
     \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}. \label{eq:Pi}
 
 We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the ``run_star_extras.f90``. 
