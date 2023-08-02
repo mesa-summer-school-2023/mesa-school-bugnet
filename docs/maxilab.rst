@@ -163,9 +163,11 @@ Add to your PGstar inlist the target values, so that you can see how close your 
 Pick a value for the initial mass from the spreadsheet and note down the lowest found :math:`\chi^2` value and the corresponding value of the internal magnetic field (in kG).
 
 .. image:: flowchart_run_star_extras.png
-   :alt: Flowchart of the ``run_star_extras``, taken from the MESA docs.
+   :alt: Flowchart
    :scale: 100%
    :align: left
+
+   Flowchart of the ``run_star_extras``, taken from the MESA docs.
 
 .. admonition:: Solution
 
