@@ -166,10 +166,9 @@ Pick a value for the initial mass from the spreadsheet and note down the lowest 
    :alt: Flowchart
    :width: 1275
    :height: 1650
-   :scale: 100%
-   :align: left
+   :scale: 50%
+   :align: right
 
-   Flowchart of the ``run_star_extras``, taken from the MESA docs.
 
 .. admonition:: Solution
 
