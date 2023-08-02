@@ -1,11 +1,11 @@
-Welcome to Lumache's documentation!
-===================================
+###############################
+Stellar internal dynamics with Asteroseismology
+###############################
 
-Exercises
+MESA labs for day 4 of the MESA@Konkoly 2023 Summer School.
+Lecturer: Lisa Bugnet
+Teaching Assistents: Arthur Le Saux, Cole Johnston, and Joey Mombarg
 
-.. note::
-
-   This project is under active development.
 
 Contents
 --------
