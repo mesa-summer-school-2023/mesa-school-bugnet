@@ -162,6 +162,13 @@ Lastly, check in the flowchart where MESA decides to keep going or terminate. He
 Add to your PGstar inlist the target values, so that you can see how close your models gets to the observations. To do this, have a look at the controls in ``inlist_pgstar`` that are currently commented out.
 Pick a value for the initial mass from the spreadsheet and note down the lowest found :math:`\chi^2` value and the corresponding value of the internal magnetic field (in kG).
 
+.. image:: flowchart_run_star_extras.png
+   :alt: Flowchart of the ``run_star_extras``, taken from the MESA docs.
+   :width: 300
+   :height: 200
+   :scale: 50%
+   :align: right
+
 .. admonition:: Solution
 
     The part where you compute and add the additional history columns should look something like this.
