@@ -10,8 +10,3 @@ This is Minilab 2.
 Contents
 --------
 
-.. toctree::
-
-   minilab1
-   minilab2
-   maxilab
