@@ -18,10 +18,11 @@ where :math:`\mu_0 = 4\pi \cdot 10^{-6} \,{\rm kG\,cm\,A^{-1} }` is the magnetic
 where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
 
 The denominator in the integral relates to the asymptotic period spacing of modes with spherical degree $\ell = 1$ as follows,
-\begin{equation}
+.. math::
+
     \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}. 
-\end{equation}
-We are going to compute the quantity $\mathcal{I}$ of a {\sc mesa} model in the \rse. 
+
+We are going to compute the quantity $\mathcal{I}$ of a {\sc mesa} model in the ``run_star_extras.f90``. 
 
 Exercise 0 
 --------
