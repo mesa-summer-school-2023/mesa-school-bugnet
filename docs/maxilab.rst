@@ -22,7 +22,7 @@ The denominator in the integral relates to the asymptotic period spacing of mode
 
     \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}. 
 
-We are going to compute the quantity $\mathcal{I}$ of a {\sc mesa} model in the ``run_star_extras.f90``. 
+We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the ``run_star_extras.f90``. 
 
 Exercise 0 
 --------
