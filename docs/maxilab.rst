@@ -19,7 +19,7 @@ where :math:`\mu_0 = 4\pi \cdot 10^{-6} \,{\rm kG\,cm\,A^{-1} }` is the magnetic
 
 where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
 
-The denominator in the integral relates to the asymptotic period spacing of modes with spherical degree $\ell = 1$ as follows,
+The denominator in the integral relates to the asymptotic period spacing of modes with spherical degree :math:`ell = 1` as follows,
 
 .. math::
 
@@ -47,7 +47,7 @@ Do a ``./clean`` and ``./mk`` and check this works.
 
 Exercise 2
 --------
-The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt-V\"ais\"al\"a frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements ``> 0``. A new array of a variable length is defined as follows,
+The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
 
 .. code:: fortran
 
@@ -63,7 +63,7 @@ Here, the declaration of the (double precision) variable goes right below the ``
     call star_ptr(id,s,ierr)
     if(ierr/=0) return
 
-We can then access variables part of the ``star_info`` structure such as the radius, density, and the squared Brunt-V\"ais\"al\"a frequency (:math:``N^2``)
+We can then access variables part of the ``star_info`` structure such as the radius, density, and the squared Brunt-Väisälä frequency (:math:`N^2`)
 
 .. code:: console
 
@@ -81,7 +81,7 @@ Compute :math:`N` from the values of :math:`N^2` defined in MESA, but set negati
     sqrt(max(0._dp, s% brunt_N2))
 
 In Fortran, the function ``max()`` will element-wise return the larger element of the two arguments. The ``_dp`` indicates we are dealing with double precision here.
- At the end of the subroutine, you can deallocate the array to free up memory.
+At the end of the subroutine, you can deallocate the array to free up memory.
 
 .. code:: console
 
@@ -111,7 +111,7 @@ In MESA, there are quantities that are defined at the mass centre of the cell, a
    :summary: Hint: In ``star_info``, ``s% r`` is defined at the cell edge, while ``s% rmid`` is defined at the centre.
 
 
-Once you have computed ``\mathcal{I}``, write this value out to the first extra column in history.
+Once you have computed :math:`\mathcal{I}`, write this value out to the first extra column in history.
 
 Exercise 3
 --------
@@ -127,7 +127,7 @@ to a value that you can then access in the ``run_star_extras.f90`` through,
 
     s% x_ctrl(1)
 
-Add a control in your inlist to do this. The observed value for KIC11515377 is ``\delta \omega_g / (2 \pi) = 126\,``nHz. The value of ``\nu_{\rm max}`` you can get from ``star_info``. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc``you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
+Add a control in your inlist to do this. The observed value for KIC11515377 is ``\delta \omega_g / (2 \pi) = 126\,``nHz. The value of ``\nu_{\rm max}`` you can get from ``star_info``. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc`` you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
 
 Finally, write :math:`\left< B_r^2\right>^{1/2}` and :math:`\Delta \Pi_1` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100 kG.
 
