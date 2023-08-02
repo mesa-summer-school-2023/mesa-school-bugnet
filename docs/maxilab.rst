@@ -51,44 +51,43 @@ The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt
 
 .. code:: fortran
 
-double precision, allocatable :: brunt_N(:)
+    double precision, allocatable :: brunt_N(:)
 
-allocate(brunt_N(s% nz))
+    allocate(brunt_N(s% nz))
 
 This defines an array with the same length as the number of cells at each time step.
 Here, the declaration of the (double precision) variable goes right below the ``subroutine``statement, and the allocate statement after all other variable declarations and the call to the ``star_info`` structure has been made. These are the lines
 
 .. code:: fortran
 
-call star_ptr(id,s,ierr)
-if(ierr/=0) return
+    call star_ptr(id,s,ierr)
+    if(ierr/=0) return
 
 We can then access variables part of the ``star_info`` structure such as the radius, density, and the squared Brunt-V\"ais\"al\"a frequency (``N^2``)
 
 .. code:: console
 
-s% r
-s% rho
-s% brunt_N2
+    s% r
+    s% rho
+    s% brunt_N2
 
 You can check out ``MESA_DIR/star_data/public/star_data_work.inc`` to see what variables are accessible this way.
 Moreover, ``s\% r(k)`` will give you the k-th element of the array.
 
- Compute ``N`` from the values of ``N^2`` defined in MESA, but set negative values to zero.
+Compute ``N`` from the values of ``N^2`` defined in MESA, but set negative values to zero.
 
- .. code:: console
+.. code:: console
 
-sqrt(max(0._dp, s% brunt_N2))
+    sqrt(max(0._dp, s% brunt_N2))
 
 In Fortran, the function ``max()`` will element-wise return the larger element of the two arguments. The ``_dp`` indicates we are dealing with double precision here.
  At the end of the subroutine, you can deallocate the array to free up memory.
 
 .. code:: console
 
-deallocate(brunt_N)
+    deallocate(brunt_N)
 
-
- If your model has a high enough spatial resolution, you can assume,
+If your model has a high enough spatial resolution, you can assume,
 
 .. math::
 
@@ -99,10 +98,10 @@ First, define two quantities in which you store the values of the two integrals.
 
 .. code:: fortran
 
-sum = 0._dp
-do k = 1, s% nz-1
-  sum = sum + delta(k)
-end do
+    sum = 0._dp
+    do k = 1, s% nz-1
+      sum = sum + delta(k)
+    end do
 
 where ``delta(k)`` is the function we want to integrate (``x_i \Delta x_i``). Remember ``k=1`` is the outermost cell.
 In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals.
@@ -141,7 +140,7 @@ Change the inlist to start the evolution from the zero-age main sequence instead
 
 .. code:: console
 
-      set_uniform_initial_composition = .true.
+    set_uniform_initial_composition = .true.
 
 Once on the RGB, after each time step, check whether the ``\chi^2`` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of ``\chi^2``. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none}. Now, in ``data_for_extra_history_columns`` you can set the value of ``\chi2``.
 In addition, also define a global variable which stores the previous value of ``\chi^2``. For the first time step, we need to initialise this variable to a large value (e.g. 1e99).
