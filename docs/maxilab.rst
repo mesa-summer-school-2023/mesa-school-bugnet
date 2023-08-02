@@ -107,6 +107,7 @@ where ``delta(k)`` is the function we want to integrate (:math:`x_i \Delta x_i`)
 In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals.
 
 .. details::
+
    :summary: Hint: In ``star_info``, ``s% r`` is defined at the cell edge, while ``s% rmid`` is defined at the centre.
 
 
