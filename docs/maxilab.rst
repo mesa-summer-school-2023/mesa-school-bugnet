@@ -1,8 +1,6 @@
 Maxilab: Measuring the magnetic field
 ===================================
 
-Contents
---------
 
 Under the influence of rotation, pulsation modes with the same spherical degree, :math:`\ell`, (number of surface nodal lines), split into multiplets, :math:`m = -\ell, -(\ell-1), ..., \ell-1, \ell`, where the azimuthal order :math:`m` indicates the number of surface nodal lines intersecting the rotational axis. On top of that, the presence of a magnetic field in the core can introduce asymmetries in the splittings (difference in frequency) of these pulsation modes. 
 In this Maxilab, we are going to infer the internal magnetic field of the red giant (RG) KIC11515377, observed with the NASA Kepler mission. We follow the methodology of `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.  The squared radial magnetic field averaged in the horizontal direction is inferred by,
