@@ -149,7 +149,7 @@ Change the inlist to start the evolution from the zero-age main sequence instead
 
     set_uniform_initial_composition = .true.
 
-Once on the RGB, after each time step, check whether the :math:`\chi^2` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of :math:`\chi^2`. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none``. Now, in ``data_for_extra_history_columns`` you can set the value of :math:`\chi2`.
+Once on the RGB, after each time step, check whether the :math:`\chi^2` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of :math:`\chi^2`. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none``. Now, in ``data_for_extra_history_columns`` you can set the value of :math:`\chi^2`.
 In addition, also define a global variable which stores the previous value of :math:`\chi^2`. For the first time step, we need to initialise this variable to a large value (e.g. 1e99).
 
 .. code:: console
