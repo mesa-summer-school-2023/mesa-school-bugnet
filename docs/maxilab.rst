@@ -9,14 +9,13 @@ In this Maxilab, we are going to infer the internal magnetic field of the red gi
 
 .. math::
 
-    \left< B_r^2\right> = \frac{\mu_0 \delta \omega_g (2 \pi \nu_{\rm max})^3}{\mathcal{I}},
+    \left< B_r^2\right> = \frac{\mu_0 \delta \omega_g (2 \pi \nu_{\rm max})^3}{\mathcal{I}},~~~~~~~~~~~(1)
 
 where :math:`\mu_0 = 4\pi \cdot 10^{-6} \,{\rm kG\,cm\,A^{-1} }` is the magnetic permeability in vacuum, :math:`\delta \omega_g` is the observed frequency shift of the g modes, and :math:`\nu_{\rm max}` is the frequency of maximum power. The factor :math:`\mathcal{I}` in the denominator is defined as,
 
 .. math::
-    :label:Iterm
 
-    \mathcal{I} = \frac{\int \left(\frac{N}{r}\right)^3 \frac{dr}{\rho}}{\int \frac{N}{r}dr},
+    \mathcal{I} = \frac{\int \left(\frac{N}{r}\right)^3 \frac{dr}{\rho}}{\int \frac{N}{r}dr},~~~~~~~~~~~(2)
 
 where :math:`N` is the Brunt-V\"ais\"al\"a frequency, :math:`\rho` is the density, and :math:`r` is the radial coordinate.
 
@@ -24,7 +23,7 @@ The denominator in the integral relates to the asymptotic period spacing of mode
 
 .. math::
 
-    \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}. \label{eq:Pi}
+    \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}.~~~~~~~~~~~(3)
 
 We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the ``run_star_extras.f90``. 
 
@@ -48,7 +47,7 @@ Do a ``./clean`` and ``./mk`` and check this works.
 
 Exercise 2
 --------
-The first step is to compute the two integrals in Eq (:eq:`Iterm`). For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
+The first step is to compute the two integrals in Eq (2). For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
 
 .. code:: fortran
 
