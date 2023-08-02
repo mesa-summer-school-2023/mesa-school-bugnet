@@ -165,6 +165,7 @@ Pick a value for the initial mass from the spreadsheet and note down the lowest 
 .. admonition:: Solution
 
     The part where you compute and add the additional history columns should look something like this.
+
     .. code:: fortran
 
         subroutine data_for_extra_history_columns(id, n, names, vals, ierr)
@@ -183,7 +184,6 @@ Pick a value for the initial mass from the spreadsheet and note down the lowest 
            ! note: do NOT add the extras names to history_columns.list
            ! the history_columns.list is only for the built-in history column options.
            ! it must not include the new column names you are adding here.
-
 
            allocate(brunt_N(s% nz))
            names(1) = 'I'
