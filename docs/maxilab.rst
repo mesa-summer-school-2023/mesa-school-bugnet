@@ -6,6 +6,7 @@ Contents
 
 Under the influence of rotation, pulsation modes with the same spherical degree, $\ell$, (number of surface nodal lines), split into multiplets :math:`m = -\ell, -(\ell-1), ..., \ell-1, \ell` where the azimuthal order :math:`m` indicates the number of surface nodal lines intersecting the rotational axis. On top of that, the presence of a magnetic field in the core can introduce asymmetries in the splittings (difference in frequency) of these pulsation modes. 
 In this Maxilab, we are going to infer the internal magnetic field of the red giant (RG) KIC11515377, observed with the NASA Kepler mission. We follow the methodology of Li et al. (2022, Nature).  The squared radial magnetic field averaged in the horizontal direction is inferred by,
+
 .. math::
 
     \left< B_r^2\right> = \frac{\mu_0 \delta \omega_g (2 \pi \nu_{\rm max})^3}{\mathcal{I}},
@@ -48,7 +49,7 @@ Exercise 2
 --------
 The first step is to compute the two integrals in Eq~(\ref{eq:I}). For the Brunt-V\"ais\"al\"a frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements ``\geq 0``. A new array of a variable length is defined as follows,
 
-.. code::
+.. code:: fortran
 
 double precision, allocatable :: brunt_N(:)
 
@@ -57,14 +58,14 @@ allocate(brunt_N(s% nz))
 This defines an array with the same length as the number of cells at each time step.
 Here, the declaration of the (double precision) variable goes right below the ``subroutine``statement, and the allocate statement after all other variable declarations and the call to the ``star_info`` structure has been made. These are the lines
 
-.. code::
+.. code:: fortran
 
 call star_ptr(id,s,ierr)
 if(ierr/=0) return
 
 We can then access variables part of the ``star_info`` structure such as the radius, density, and the squared Brunt-V\"ais\"al\"a frequency (``N^2``)
 
-.. code::
+.. code:: console
 
 s% r
 s% rho
@@ -75,14 +76,14 @@ Moreover, ``s\% r(k)`` will give you the k-th element of the array.
 
  Compute ``N`` from the values of ``N^2`` defined in MESA, but set negative values to zero.
 
- .. code::
+ .. code:: console
 
 sqrt(max(0._dp, s% brunt_N2))
 
 In Fortran, the function ``max()`` will element-wise return the larger element of the two arguments. The ``_dp`` indicates we are dealing with double precision here.
  At the end of the subroutine, you can deallocate the array to free up memory.
 
-.. code::
+.. code:: console
 
 deallocate(brunt_N)
 
@@ -96,7 +97,7 @@ deallocate(brunt_N)
 where the index ``i`` runs over the cells.
 First, define two quantities in which you store the values of the two integrals. For the summation (integral), you will have to something like
 
-.. code::
+.. code:: fortran
 
 sum = 0._dp
 do k = 1, s% nz-1
@@ -114,13 +115,13 @@ Exercise 3
 --------
 Next, we want to pass on the value of ``\delta \omega_g`` to the ``run_star_extras.f90``. In your inlist, you can set
 
-.. code::
+.. code:: console
 
     x_ctrl(1) = ...
 
 to a value that you can then access in the ``run_star_extras.f90`` through,
 
-.. code::
+.. code:: console
 
     s% x_ctrl(1)
 
@@ -138,21 +139,21 @@ Finally, we want to stop the evolution when the model has roughly reached the ob
 
 Change the inlist to start the evolution from the zero-age main sequence instead of loading in a precomputed RGB model. Be sure to properly set the initial composition by setting
 
-.. code::
+.. code:: console
 
       set_uniform_initial_composition = .true.
 
 Once on the RGB, after each time step, check whether the ``\chi^2`` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of ``\chi^2``. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none}. Now, in ``data_for_extra_history_columns`` you can set the value of ``\chi2``.
 In addition, also define a global variable which stores the previous value of ``\chi^2``. For the first time step, we need to initialise this variable to a large value (e.g. 1e99).
 
-.. code::
+.. code:: console
 
     chi2_old = 1d99
 
 Have a look at the flowchart in Fig.~\ref{fig:flowchart} and see which subroutine is only called once at the start of a run.
 Lastly, check in the flowchart where MESA decides to keep going or terminate. Here, add a condition that will terminate the run if the new ``\chi^2`` is larger than the previous value. Else, update the previous value to the new one. To make sure we are on the RG branch, add the following second condition
 
-.. code::
+.. code:: console
 
     safe_log10(s% Teff) < 3.7
 
