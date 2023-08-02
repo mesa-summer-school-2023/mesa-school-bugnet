@@ -130,7 +130,7 @@ to a value that you can then access in the ``run_star_extras.f90`` through,
 
     s% x_ctrl(1)
 
-Add a control in your inlist to do this. The observed value for KIC11515377 is :math:`\delta \omega_g / (2 \pi) = 126`nHz. The value of math:`\nu_{\rm max}` you can get from ``star_info``. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc`` you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
+Add a control in your inlist to do this. The observed value for KIC11515377 is :math:`\delta \omega_g / (2 \pi) = 126` nHz. The value of math:`\nu_{\rm max}` you can get from ``star_info``. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc`` you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
 
 Finally, write :math:`\left< B_r^2\right>^{1/2}` and :math:`\Delta \Pi_1` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100 kG.
 
