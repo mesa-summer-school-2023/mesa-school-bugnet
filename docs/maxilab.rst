@@ -156,7 +156,11 @@ In addition, also define a global variable which stores the previous value of :m
 
     chi2_old = 1d99
 
-Have a look at the flowchart in Fig.~\ref{fig:flowchart} and see which subroutine is only called once at the start of a run.
+.. tip::
+
+    The figure at the bottom shows the flow of the ``run_star_extras.f90``, taken from the MESA docs.
+    Have a look at the flowchart and see which subroutine is only called once at the start of a run.
+
 Lastly, check in the flowchart where MESA decides to keep going or terminate. Here, add a condition that will terminate the run if the new :math:`\chi^2` is larger than the previous value. Else, update the previous value to the new one. To make sure we are on the RG branch, add the following second condition
 
 .. code:: console
@@ -166,9 +170,7 @@ Lastly, check in the flowchart where MESA decides to keep going or terminate. He
 Add to your PGstar inlist the target values, so that you can see how close your models gets to the observations. To do this, have a look at the controls in ``inlist_pgstar`` that are currently commented out.
 Pick a value for the initial mass from the spreadsheet and note down the lowest found :math:`\chi^2` value and the corresponding value of the internal magnetic field (in kG).
 
-.. tip::
-
-    The figure below shows the flow of the ``run_star_extras.f90``, taken from the MESA docs.   
+   
 
 .. image:: flowchart_run_star_extras.png
    :alt: Flowchart
