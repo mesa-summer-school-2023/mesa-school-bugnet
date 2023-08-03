@@ -9,7 +9,7 @@ This first minilab focuses on the coupling between p and g modes, i.e. mixed mod
 
     \mathrm{E} = \frac{\int_0^{M_{\rm star}} \left[|\xi_r(r)|^2 + \ell \left(\ell + 1 \right) |\xi_{\rm h}(r)|^2 \right] \mathrm{d} M}{M_{\rm star} \left[|\xi_r(R_{\rm star})|^2 + \ell \left(\ell + 1 \right) |\xi_{\rm h}(R_{\rm star})|^2 \right]}
 
-with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photospheric radius of the star, :math:`\xi_r` and :math:`\xi_{\rm h}` the radial and horizontal displacements associated with the mode, :math:`\ell` the angular degree from the spherical harmonics and :math:`\mathrm{d}M = 4\pi \rho r^2 \mathrm{d}r` the mass enclose in the sphere between :math:`r` and :math:`r + \mathrm{d}r`. For mixed modes, the mode inertia presents a typical oscillating pattern as illustrated in Fig. \ref{fig:mode_inertia_RG}, which present the inertia :math:`E` of mixed modes as a function of frequency.
+with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photospheric radius of the star, :math:`\xi_r` and :math:`\xi_{\rm h}` the radial and horizontal displacements associated with the mode, :math:`\ell` the angular degree from the spherical harmonics and :math:`\mathrm{d}M = 4\pi \rho r^2 \mathrm{d}r` the mass enclose in the sphere between :math:`r` and :math:`r + \mathrm{d}r`. For mixed modes, the mode inertia presents a typical oscillating pattern as illustrated in the figure below, which present the inertia :math:`E` of mixed modes as a function of frequency.
 
 .. image:: mode_inertia_profile30_f50-150.png
    :alt: Mode_inertia
@@ -193,7 +193,7 @@ The last step for this minilab is to plot the mode inertia to see what it looks 
   Grid1_txt_scale_factor(6) = 0.5
 
 
-The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_name`` define what variable are assigned to the x and y axis respectively. You can modify the displayed range of frequency by editing the ``Profile_Panels1_xmin`` and ``Profile_Panels1_xmax`` parameters. Verify that you get the oscillations pattern presented in Fig. \ref{fig:mode_inertia_RG} for the dipolar mode :math:`\ell = 1`.
+The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_name`` define what variable are assigned to the x and y axis respectively. You can modify the displayed range of frequency by editing the ``Profile_Panels1_xmin`` and ``Profile_Panels1_xmax`` parameters. Verify that you get the oscillations pattern presented in the figure above for the dipolar mode :math:`\ell = 1`.
 
 .. admonition:: Bonus exercise
 
