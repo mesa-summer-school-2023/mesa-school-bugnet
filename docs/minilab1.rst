@@ -19,19 +19,16 @@ with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photosp
    :align: right
 
 
-Each cross corresponds to an eigenmode computed using GYRE
-. The modes with low inertia are mostly confined in the envelope and thus dominated by the p mode component, whereas the modes with high inertia are dominated by the g mode part. The high density of the modes in the crest of the oscillations are a consequence of the asymptotic period spacing of g modes $\Delta \Pi$ (already introduced on Tuesday).
+Each cross corresponds to an eigenmode computed using GYRE. The modes with low inertia are mostly confined in the envelope and thus dominated by the p mode component, whereas the modes with high inertia are dominated by the g mode part. The high density of the modes in the crest of the oscillations are a consequence of the asymptotic period spacing of g modes :math:`\Delta \Pi` (already introduced on Tuesday).
 
 The main goal of today's labs is to study the red giant star KIC11515377 observed by the *Kepler* satellite from NASA and reproduce the results from `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.
 
 Evolve model to RGB
 --------
 
-For this minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE
- on the fly during a MESA run. The composition of the star is set to the values given by Li et al. (2022, Nature), who have used the standard Solar abundances from Grevesse & Sauval 1998 (GS98).
+For this minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run. The composition of the star is set to the values given by Li et al. (2022, Nature), who have used the standard Solar abundances from Grevesse & Sauval 1998 (GS98).
 
-First, download the ``minilab_1``
- work directory. The ``inlist_project`` file from this working directory has already been edited to run from ZAMS and to stop when the effective temperature of the star is lower than :math:`10^{3.7}`.
+First, download the ``minilab_1`` work directory. The ``inlist_project`` file from this working directory has already been edited to run from ZAMS and to stop when the effective temperature of the star is lower than :math:`10^{3.7}`.
 As usual, start by changing the current working directory and compile the code, with
 
 .. code-block:: console
@@ -45,8 +42,7 @@ This step should create the ``star`` executable file. You can run the model, i.e
 
     ./rn
 
-A PGstar plot window displaying information about the structure and evolution of the star should appear. You can stop the run using the command ``
-Ctrl+C``.
+A PGstar plot window displaying information about the structure and evolution of the star should appear. You can stop the run using the command ``Ctrl+C``.
 Have a look at the ``inlist_project`` to see what settings are used for this run. Ask one of the TAs if there is anything you do not understand or search in the MESA docs.
 
 Running GYRE on the fly
@@ -79,9 +75,7 @@ Open the ``run_star_extras`` file that is located in the ``src/`` directory. To 
     call gyre_set_constant('GYRE_DIR', TRIM(mesa_dir)//'/gyre/gyre')
 
 
-The first function ``gyre_init`` initialises GYRE
- and calls the GYRE inlist file ``gyre_mix.in`. This file is used to set up the parameters required to run GYRE
- and is already present in the working directory.
+The first function ``gyre_init`` initialises GYRE and calls the GYRE inlist file ``gyre_mix.in`. This file is used to set up the parameters required to run GYRE and is already present in the working directory.
 
 Next, in order to run GYRE we have added a subroutine ``run_gyre` at the end of the ``run_star_extras`` file.
 
@@ -144,14 +138,9 @@ Next, in order to run GYRE we have added a subroutine ``run_gyre` at the end of 
     end subroutine run_gyre
 
 
-This subroutine runs GYRE on a given MESA model identified with the variable ``id`. First, the function ``
-star_get_pulse_data` extract from the MESA model the data required for pulsation analysis. These data are separated in two arrays: ``
-global_data`` and ``point_data``. Next, the function ``gyre_set_model`` sends these data to GYRE. Then, with the function ``gyre_get_modes``, GYRE actually computes the eigenmodes of the stellar model for angular degree :math:`\ell = 1`. In this function the first integer indicates the angular degree to compute, it can be modified to get other modes. This function takes as an argument ``
-process_mode``, which is the last subroutine we have defined. It means that when executing the function ``gyre_get_modes``, MESA calls and execute ``process_mode``. Thanks to this function, we can decide what GYRE
- outputs are. Here, we are interested in the frequencies and the inertia of the modes, and we store them in the global arrays ``frequencies(:,:)`` and ``inertias(:,:)``.
+This subroutine runs GYRE on a given MESA model identified with the variable ``id`. First, the function ``star_get_pulse_data`` extract from the MESA model the data required for pulsation analysis. These data are separated in two arrays: ``global_data`` and ``point_data``. Next, the function ``gyre_set_model`` sends these data to GYRE. Then, with the function ``gyre_get_modes``, GYRE actually computes the eigenmodes of the stellar model for angular degree :math:`\ell = 1`. In this function the first integer indicates the angular degree to compute, it can be modified to get other modes. This function takes as an argument ``process_mode``, which is the last subroutine we have defined. It means that when executing the function ``gyre_get_modes``, MESA calls and execute ``process_mode``. Thanks to this function, we can decide what GYRE outputs are. Here, we are interested in the frequencies and the inertia of the modes, and we store them in the global arrays ``frequencies(:,:)`` and ``inertias(:,:)``.
 
-Now that we have set up GYRE
-, it is ready to run during a MESA run, the last thing to do is to set:
+Now that we have set up GYRE, it is ready to run during a MESA run, the last thing to do is to set:
 
 .. code-block:: console
 
@@ -208,7 +197,8 @@ The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_na
 
 .. admonition:: Bonus exercise
 
-    Try to plot the mode inertias for the modes of spherical degree :math:`\ell = 0` or 2. To do so, you will need to edit the following files: ``gyre_mix.in``, ``run_star_extras`` and ``inlist_pgstar``.
+    Try to plot the mode inertias for the modes of spherical degree :math:`\ell = 0` or 2. To do so, you will need to edit the following files: ``gyre_mix.in``, 
+    ``run_star_extras`` and ``inlist_pgstar``.
 
 .. image:: flowchart_run_star_extras.png
    :alt: Flowchart
