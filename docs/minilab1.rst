@@ -43,13 +43,13 @@ This step should create the ``star`` executable file. You can run the model, i.e
 
     ./rn
 
-A PGstar plot window displaying information about the structure and evolution of the star should appear. You can stop the run using the command ``Ctrl+C``.
+A PGstar plot window displaying information about the structure and evolution of the star should appear. Some panels we will activate later on. You can stop the run using the command ``Ctrl+C``.
 Have a look at the ``inlist_project`` to see what settings are used for this run. Ask one of the TAs if there is anything you do not understand or search in the MESA docs.
 
 Running GYRE on the fly
 --------
-As mentioned, we want to observe the variations of the mode inertia as a function of frequency, as the star evolve to identify mixed modes. To do so, we want to run GYRE
- at each time step during the MESA run. This is done by editing the ``run_star_extras`` file.
+
+As mentioned, we want to observe the variations of the mode inertia as a function of frequency, as the star evolve to identify mixed modes. To do so, we want to run GYRE at each time step during the MESA run. This is done by editing the ``run_star_extras`` file.
 
 .. tip::
 
