@@ -13,10 +13,10 @@ with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photosp
 
 .. image:: mode_inertia_profile30_f50-150.png
    :alt: Mode_inertia
-   :width: 1275
-   :height: 1650
+   :width: 2372
+   :height: 960
    :scale: 50%
-   :align: right
+   :align: left
 
 
 Each cross corresponds to an eigenmode computed using GYRE
