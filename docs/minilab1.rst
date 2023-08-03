@@ -75,9 +75,9 @@ Open the ``run_star_extras`` file that is located in the ``src/`` directory. To 
     call gyre_set_constant('GYRE_DIR', TRIM(mesa_dir)//'/gyre/gyre')
 
 
-The first function ``gyre_init`` initialises GYRE and calls the GYRE inlist file ``gyre_mix.in`. This file is used to set up the parameters required to run GYRE and is already present in the working directory.
+The first function ``gyre_init`` initialises GYRE and calls the GYRE inlist file ``gyre_mix.in``. This file is used to set up the parameters required to run GYRE and is already present in the working directory.
 
-Next, in order to run GYRE we have added a subroutine ``run_gyre` at the end of the ``run_star_extras`` file.
+Next, in order to run GYRE we have added a subroutine ``run_gyre`` at the end of the ``run_star_extras`` file.
 
 .. code-block:: fortran
 
