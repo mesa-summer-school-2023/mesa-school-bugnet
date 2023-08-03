@@ -25,7 +25,7 @@ The denominator in the integral relates to the asymptotic period spacing of mode
 
 We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the ``run_star_extras.f90``. 
 
-Exercise 0 
+Exercise 0: Setup 
 --------
 As a first step, download and unzip `this
 <https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/docs/work_maxi.zip>`__ work directory. 
@@ -36,7 +36,7 @@ As a first step, download and unzip `this
 
 At each step of the evolution we want to compute :math:`\left< B_r^2\right>^{1/2}` and store it in the output of the history file. 
 
-Exercise 1 
+Exercise 1: Adding additional history output 
 --------
 Prepare in the ``run_star_extras.f90`` three additional history columns named ``I``, ``Br_mean``, and ``Delta_Pi1``. Set the correct number of additional columns in the ``how_many_extra_history_columns`` function, and add the following to ``data_for_extra_history_columns`` for each additional column,
 
@@ -48,7 +48,7 @@ Prepare in the ``run_star_extras.f90`` three additional history columns named ``
 You can set the values to 0 for now.
 Do a ``./clean`` and ``./mk`` and check this works.
 
-Exercise 2
+Exercise 2: Integrating stellar quatities
 --------
 The first step is to compute the two integrals in Eq (2). For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
 
@@ -120,7 +120,7 @@ Once you have computed :math:`\mathcal{I}`, write this value out to the first ex
 
    If you are really stuck, have a look to part of the solutions at the bottom of this page.
     
-Exercise 3
+Exercise 3: Compute the internal magnetic field
 --------
 Next, we want to pass on the value of :math:`\delta \omega_g` to the ``run_star_extras.f90``. In your inlist, you can set
 
@@ -138,7 +138,7 @@ Add a control in your inlist to do this. The observed value for KIC11515377 is :
 
 Finally, write :math:`\left< B_r^2\right>^{1/2}` and :math:`\Delta \Pi_1` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100 kG.
 
-Exercise 4
+Exercise 4: Find the best-matching model
 --------
 Finally, we want to stop the evolution when the model has roughly reached the observed values of :math:`\nu_{\rm max, obs} = 191.6 \pm 1\,\mu{\rm Hz}` and :math:`\Delta \Pi_{\rm 1, obs} = 83.16 \pm 1\,{\rm s}`. Add two additional controls to your inlist to pass these two values on to the ``run_star_extras.f90`` and define
 
@@ -152,7 +152,7 @@ Change the inlist to start the evolution from the zero-age main sequence instead
 
     set_uniform_initial_composition = .true.
 
-Once on the RGB, after each time step, check whether the :math:`\chi^2` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of :math:`\chi^2`. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none``. Now, in ``data_for_extra_history_columns`` you can set the value of :math:`\chi^2`.
+We want to terminate at the model that is closest to the observations. Once on the RGB, after each time step, check whether the :math:`\chi^2` is smaller or bigger than the previous value. If it is bigger, terminate. First, define a global variable in which you store the value of :math:`\chi^2`. A global variable means this variable can be accessed by all subroutines in the ``run_star_extras.f90``, and is declared at the start of the ``run_star_extras.f90``, right below ``implicit none``. Now, in ``data_for_extra_history_columns`` you can set the value of :math:`\chi^2`.
 In addition, also define a global variable which stores the previous value of :math:`\chi^2`. For the first time step, we need to initialise this variable to a large value (e.g. 1e99).
 
 .. code:: console
