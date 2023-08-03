@@ -147,7 +147,7 @@ Now that we have set up GYRE, it is ready to run during a MESA run, the last thi
 
     x_logical_ctrl(1) = .true.
 
-in the ``inlist_project` file.
+in the ``inlist_project`` file.
 Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`` and start running the model with the usual command ``./rn``. At some point during the run, the terminal should print something like
 
 .. code-block:: console
