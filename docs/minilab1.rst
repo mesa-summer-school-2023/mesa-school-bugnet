@@ -53,9 +53,12 @@ Running GYRE on the fly
 --------
 As mentioned, we want to observe the variations of the mode inertia as a function of frequency, as the star evolve to identify mixed modes. To do so, we want to run GYRE
  at each time step during the MESA run. This is done by editing the ``run_star_extras`` file.
-Open the ``run_star_extras`` file that is located in the ``src/`` directory. To initialize GYRE
-, add the following lines in ``run_star_extras`` in the ``extras_startup`` subroutine
 
+.. tip::
+
+    The figure at the bottom shows the flow of the ``run_star_extras.f90``, taken from the MESA docs.
+
+Open the ``run_star_extras`` file that is located in the ``src/`` directory. To initialize GYRE, add the following lines in ``run_star_extras`` in the ``extras_startup`` subroutine.
 
 .. code-block:: fortran
 
@@ -206,6 +209,13 @@ The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_na
 .. admonition:: Bonus exercise
 
     Try to plot the mode inertias for the modes of spherical degree :math:`\ell = 0` or 2. To do so, you will need to edit the following files: ``gyre_mix.in``, ``run_star_extras`` and ``inlist_pgstar``.
+
+.. image:: flowchart_run_star_extras.png
+   :alt: Flowchart
+   :width: 1275
+   :height: 1650
+   :scale: 50%
+   :align: right
 
 
 
