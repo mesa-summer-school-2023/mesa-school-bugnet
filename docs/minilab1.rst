@@ -151,9 +151,9 @@ Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`
 
 .. code-block:: console
 
-Found mode: index, l, m, n_p, n_g, zeta, nu = 130 1 0 3 82 -79 2.285E-02 125.57
+    Found mode: index, l, m, n_p, n_g, zeta, nu = 130 1 0 3 82 -79 2.285E-02 125.57
 
-The last variable $nu$ is the frequency of the corresponding mode. You can edit the ``gyre_mix.in`` to change the range of frequencies of the modes computed by GYRE
+The last variable ``nu`` is the frequency of the corresponding mode. You can edit the ``gyre_mix.in`` to change the range of frequencies of the modes computed by GYRE
 . To do so change the parameters
 
 .. code-block:: console
