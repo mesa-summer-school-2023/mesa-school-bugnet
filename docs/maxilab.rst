@@ -183,7 +183,7 @@ Pick a value for the initial mass from the spreadsheet and note down the lowest 
    :align: right
 
 
-.. admonition:: Solution
+.. collapse:: Solution
 
     The part where you compute and add the additional history columns should look something like this.
 
