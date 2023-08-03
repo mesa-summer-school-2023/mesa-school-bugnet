@@ -1,4 +1,4 @@
-Minilab 2
+Minilab 2: Rotation
 ===================================
 
 This is Minilab 2. 
