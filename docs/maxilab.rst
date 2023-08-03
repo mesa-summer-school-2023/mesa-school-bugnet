@@ -170,7 +170,7 @@ Lastly, check in the flowchart where MESA decides to keep going or terminate. He
 
     safe_log10(s% Teff) < 3.7
 
-Add to your PGstar inlist the target values, so that you can see how close your models gets to the observations. To do this, have a look at the controls in ``inlist_pgstar`` that are currently commented out.
+Add to your PGstar inlist the target values, so that you can see how close your models gets to the observations. To do this, have a look at the controls in ``inlist_pgstar`` that are currently commented out. This is similar to what we did in Minilab 1, except now we are plotting history output instead of profile output.
 Pick a value for the initial mass from the spreadsheet and note down the lowest found :math:`\chi^2` value and the corresponding value of the internal magnetic field (in kG).
 
    
