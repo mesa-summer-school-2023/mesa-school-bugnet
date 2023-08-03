@@ -1,4 +1,4 @@
-Minilab 1
+Minilab 1: Asteroseismology of mixed modes
 ===================================
 
 This is Minilab 1. 
