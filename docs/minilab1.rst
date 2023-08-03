@@ -24,7 +24,7 @@ Each cross corresponds to an eigenmode computed using GYRE. The modes with low i
 
 The main goal of today's labs is to study the red giant star KIC11515377 observed by the *Kepler* satellite from NASA and reproduce the results from `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.
 
-Evolve model to RGB
+Exercise 1: Evolve model to RGB
 --------
 
 For this minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run. The composition of the star is set to the values given by Li et al. (2022, Nature), who have used the standard Solar abundances from Grevesse & Sauval 1998 (GS98).
@@ -46,7 +46,7 @@ This step should create the ``star`` executable file. You can run the model, i.e
 A PGstar plot window displaying information about the structure and evolution of the star should appear. Some panels we will activate later on. You can stop the run using the command ``Ctrl+C``.
 Have a look at the ``inlist_project`` to see what settings are used for this run. Ask one of the TAs if there is anything you do not understand or search in the MESA docs.
 
-Running GYRE on the fly
+Exercise 2: Running GYRE on the fly
 --------
 
 As mentioned, we want to observe the variations of the mode inertia as a function of frequency, as the star evolve to identify mixed modes. To do so, we want to run GYRE at each time step during the MESA run. This is done by editing the ``run_star_extras`` file.
@@ -164,7 +164,7 @@ The last variable ``nu`` is the frequency of the corresponding mode. You can edi
 
 
 
-Mode inertia
+Exercise 3: Mode inertia
 --------
 
 The last step for this minilab is to plot the mode inertia to see what it looks like. For that, we need to edit the ``inlist_pgstar`` file. This file controls what is plotted in the pgstar window during a MESA run. Take some time to have a look at it. You can notice that there are parameters to control what is plotted but also the size and location of the plots. In order to get the mode inertia plotted, the next lines of code should be added at the end of the file
