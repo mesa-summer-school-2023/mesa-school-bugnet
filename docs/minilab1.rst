@@ -15,7 +15,7 @@ with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photosp
    :alt: Mode_inertia
    :width: 2372
    :height: 960
-   :scale: 100%
+   :scale: 25%
    :align: right
 
 
