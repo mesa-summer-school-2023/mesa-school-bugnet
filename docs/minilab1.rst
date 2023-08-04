@@ -29,6 +29,7 @@ Exercise 1: Evolve model to RGB
 
 For this minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run. The composition of the star is set to the values given by Li et al. (2022, Nature), who have used the standard Solar abundances from Grevesse & Sauval 1998 (GS98).
 
+
 First, download the ``minilab_1`` work directory. The ``inlist_project`` file from this working directory has already been edited to run from ZAMS and to stop when the effective temperature of the star is lower than :math:`10^{3.7}`.
 As usual, start by changing the current working directory and compile the code, with
 
@@ -49,7 +50,7 @@ Have a look at the ``inlist_project`` to see what settings are used for this run
 Exercise 2: Running GYRE on the fly
 --------
 
-As mentioned, we want to observe the variations of the mode inertia as a function of frequency, as the star evolve to identify mixed modes. To do so, we want to run GYRE at each time step during the MESA run. This is done by editing the ``run_star_extras`` file.
+As mentioned, we want to observe the variations of the mode inertia as a function of frequency, as the star evolves, in order to identify mixed modes. To do so, we want to run GYRE at each time step during the MESA run. This is done by editing the ``run_star_extras`` file.
 
 .. tip::
 
@@ -125,7 +126,7 @@ Next, in order to run GYRE we have added a subroutine ``run_gyre`` at the end of
           if (ierr /= 0) return
 
           ! Print out degree, radial order, mode inertia, and frequency
-          print *, 'Found mode: index, l, m, n_p, n_g, zeta, nu = ', &
+          print *, 'Found mode: index, l, m, n_p, n_g, E_norm, nu = ', &
               md%id-nmax_prev, md%l, md%m, md%n_p, md%n_g, md%n_pg,
               REAL(md%E_norm()),REAL(md%freq('UHZ'))
 
