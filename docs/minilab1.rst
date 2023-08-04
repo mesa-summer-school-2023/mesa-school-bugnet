@@ -45,7 +45,7 @@ This step should create the ``star`` executable file. You can run the model, i.e
     ./rn
 
 A PGstar plot window displaying information about the structure and evolution of the star should appear. Some panels we will activate later on. You can stop the run using the command ``Ctrl+C``.
-Have a look at the ``inlist_project`` to see what settings are used for this run. Ask one of the TAs if there is anything you do not understand or search in the MESA docs.
+Any additional info on the inlist settings can be found in the `MESA docs <https://docs.mesastar.org/en/latest/>`__.
 
 Exercise 2: Running GYRE on the fly
 --------
