@@ -7,8 +7,8 @@ This first minilab focuses on the coupling between p and g modes, i.e. mixed mod
 
 .. math::
 
-    \mathrm{E} = \frac{\int_0^{M_{\rm star}} \left[|\xi_r(r)|^2 + \ell \left(\ell + 1 \right) |\xi_{\rm h}(r)|^2 \right] \mathrm{d} M}{M_{\rm star} \left[|\xi_r(R_{\rm star})|^2 
-    + \ell \left(\ell + 1 \right) |\xi_{\rm h}(R_{\rm star})|^2 \right]}
+    \mathrm{E} = \frac{\int_0^{M_{\rm star}} \left[|\xi_r(r)|^2 + \ell \left(\ell + 1 \right) |\xi_{\rm h}(r)|^2 \right] \mathrm{d} M}{M_{\rm star} \left[|\xi_r(R_{\rm star})|^2
+    + \ell \left(\ell + 1 \right) |\xi_{\rm h}(R_{\rm star})|^2 \right]}~~~~~~~~~~~~(1)
 
 with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photospheric radius of the star, :math:`\xi_r` and :math:`\xi_{\rm h}` the radial and horizontal displacements associated with the mode, :math:`\ell` the angular degree from the spherical harmonics and :math:`\mathrm{d}M = 4\pi \rho r^2 \mathrm{d}r` the mass enclose in the sphere between :math:`r` and :math:`r + \mathrm{d}r`. For mixed modes, the mode inertia presents a typical oscillating pattern as illustrated in the figure below, which present the inertia :math:`E` of mixed modes as a function of frequency.
 
@@ -22,13 +22,40 @@ with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photosp
 
 Each cross corresponds to an eigenmode computed using GYRE. The modes with low inertia are mostly confined in the envelope and thus dominated by the p mode component, whereas the modes with high inertia are dominated by the g mode part. The high density of the modes in the crest of the oscillations are a consequence of the asymptotic period spacing of g modes :math:`\Delta \Pi` (already introduced on Tuesday).
 
-The main goal of today's labs is to study the red giant star KIC11515377 observed by the *Kepler* satellite from NASA and reproduce the results from `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.
+The main goal of today's labs is to study the red giant (RG) star KIC11515377 observed by the *Kepler* satellite from NASA and reproduce the results from `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.
+For this first minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run.
 
-Exercise 1: Evolve model to RGB
+Exercise 1: Setup
 --------
 
-For this minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run. The composition of the star is set to the values given by Li et al. (2022, Nature), who have used the standard Solar abundances from Grevesse & Sauval 1998 (GS98).
+First, download the Minilab 1 work directory here. The ``inlist_project`` file from this working directory has already been edited to model the RG star KIC11515377. It is sets to run from ZAMS and to stop when the effective temperature of the star is lower than $10^{3.5}$. This stopping condition is arbitrary, and we will stop before.
+The composition of the star is set to the values given by Li et al. (2022, Nature). To do so, we set an initial composition that is uniform in the star by setting to true the following parameter in the ``&star_job`` section of the ``inlist_project``.
 
+.. code-block:: console
+
+    set_uniform_initial_composition = .true.
+
+Then we specify the desired composition with
+
+.. code-block:: console
+
+    initial_h1  = 0.6669718492873334
+    initial_h2  = 1.333943698574667e-05
+    initial_he3 = 5.0123679469208106e-05
+    initial_he4 = 0.3019498763205308
+
+    initial_zfracs = 3
+
+The last parameter ``initial_zfracs = 3`` sets the metals fractions abundances according to Grevesse & Sauval 1998 (GS98). We then set the corresponding opacities in the ``\&kap`` section.
+Because the final objective is to compare with observations, we have also tuned the atmopsheric boundary conditions with
+
+.. code-block:: console
+
+    atm_option = 'T_tau'
+    atm_T_tau_relation = 'Eddington'
+    atm_T_tau_opacity = 'varying'
+
+This defines how the surface pressure and temperature are computed. We are using the Eddington grey relation, about which you can found more information `here <https://docs.mesastar.org/en/latest/atm/t-tau.html>`__.
 
 First, download the ``minilab_1`` work directory. The ``inlist_project`` file from this working directory has already been edited to run from ZAMS and to stop when the effective temperature of the star is lower than :math:`10^{3.7}`.
 As usual, start by changing the current working directory and compile the code, with
@@ -155,7 +182,9 @@ Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`
 
     Found mode: index, l, m, n_p, n_g, E_norm, nu = 130 1 0 3 82 -79 2.285E-02 125.57
 
-The last variable ``nu`` is the frequency of the corresponding mode. You can edit the ``gyre_mix.in`` to change the range (and units of the range) of frequencies of the modes computed by GYRE. To do so change the parameters
+The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes, you can stop the run using ``Ctrl+C``.
+
+You can edit the ``gyre_mix.in`` to change the range (and units of the range) of frequencies of the modes computed by GYRE. To do so change the parameters
 
 .. code-block:: console
 
@@ -168,7 +197,7 @@ The last variable ``nu`` is the frequency of the corresponding mode. You can edi
 Exercise 3: Mode inertia
 --------
 
-The last step for this minilab is to plot the mode inertia to see what it looks like. For that, we need to edit the ``inlist_pgstar`` file. This file controls what is plotted in the pgstar window during a MESA run. Take some time to have a look at it. You can notice that there are parameters to control what is plotted but also the size and location of the plots. In order to get the mode inertia plotted, the next lines of code should be added at the end of the file
+The last step for this minilab is to plot the mode inertia Eq. (1) to see what it looks like. This equation is already implemented in GYRE, so it can be computed directly using the parameter ``E_norm``. For that, we need to edit the ``inlist_pgstar`` file. This file controls what is plotted in the pgstar window during a MESA run. Take some time to have a look at it. You can notice that there are parameters to control what is plotted but also the size and location of the plots. In order to get the mode inertia plotted, the next lines of code should be added at the end of the file
 
 .. code-block:: console
 
@@ -199,7 +228,7 @@ The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_na
 
 .. admonition:: Bonus exercise
 
-    Try to plot the mode inertias for the modes of spherical degree :math:`\ell = 0` or 2. To do so, you will need to edit the following files: ``gyre_mix.in``, 
+    Try to plot the mode inertias for the modes of spherical degree :math:`\ell = 0` or 2. To do so, you will need to edit the following files: ``gyre_mix.in``,
     ``run_star_extras`` and ``inlist_pgstar``.
 
 .. image:: flowchart_run_star_extras.png
@@ -208,6 +237,3 @@ The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_na
    :height: 1650
    :scale: 50%
    :align: right
-
-
-
