@@ -3,7 +3,7 @@ Minilab 1: Asteroseismology of mixed modes
 
 Stars oscillate due to waves propagating in their interiors. The waves we are interested in, in the context of this project, i.e. the one responsible for solar-like oscillations (see e.g. García & Ballot 2019), are excited by turbulent convection. As they propagate, these waves interfere and form normal modes of oscillations, i.e. standing waves, which frequency depends on the internal structure of the star. For this reason, they are called *eigenmodes* of the star, the associated frequencies are the *eigenfrequencies*, and we can also calculate the *eigenfunctions*, i.e. the variation of the waves' perturbation with radius. These are obtained by solving the equations of stellar oscillations (see XXX, lecture?). Depending on the frequency of the wave, we distinguish two kind of waves: internal gravity waves (low frequency) and acoustic waves (high frequency). Modes associated with internal gravity waves are g modes (these are the ones studied during Tuesday labs) and the ones associated with acoustic waves are p modes. Each mode is identified with a combination of three integers: the angular, or spherical harmonic, degree :math:`\ell`, the azimuthal order :math:`m` and the radial order :math:`n`.
 
-This first minilab focuses on the coupling between p and g modes, i.e. mixed modes, in a red giant star model. To illustrate this coupling, a useful diagnostic is to look at the normalised mode inertia E, which is defined as (see e.g. Eq. 43 of Hekker & Christensen-Dalsgaard 2017)
+This first minilab focuses on the coupling between p and g modes, i.e. mixed modes, in a red giant star model. These modes are very important because due to this coupling they allow to probe the entire interior of stars. To illustrate this coupling, a useful diagnostic is to look at the normalised mode inertia E, which is defined as (see e.g. Eq. 43 of Hekker & Christensen-Dalsgaard 2017)
 
 .. math::
 
@@ -28,7 +28,7 @@ For this first minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` s
 Exercise 1: Setup
 --------
 
-First, download the Minilab 1 work directory here. The ``inlist_project`` file from this working directory has already been edited to model the RG star KIC11515377. It is sets to run from ZAMS and to stop when the effective temperature of the star is lower than :math:`10^{3.5}`. This stopping condition is arbitrary, and we will stop before.
+First, download the Minilab 1 work directory here. The ``inlist_project`` file from this working directory has already been edited to model the RG star KIC11515377. It is sets to run from ZAMS and to stop when the effective temperature of the star is lower than $10^{3.5}$. This stopping condition is arbitrary, and we will stop before.
 The composition of the star is set to the values given by Li et al. (2022, Nature). To do so, we set an initial composition that is uniform in the star by setting to true the following parameter in the ``&star_job`` section of the ``inlist_project``.
 
 .. code-block:: console
@@ -224,7 +224,17 @@ The last step for this minilab is to plot the mode inertia Eq. (1) to see what i
   Grid1_txt_scale_factor(6) = 0.5
 
 
-The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_name`` define what variable are assigned to the x and y axis respectively. You can modify the displayed range of frequency by editing the ``Profile_Panels1_xmin`` and ``Profile_Panels1_xmax`` parameters. Verify that you get the oscillations pattern presented in the figure above for the dipolar mode :math:`\ell = 1`.
+The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_name`` define what variable are assigned to the x and y axis respectively. You can modify the displayed range of frequency by editing the ``Profile_Panels1_xmin`` and ``Profile_Panels1_xmax`` parameters.
+Now, you can start a new run with ``./rn``. A new plot should have appeared on your pgstar window. Initially, this new plot will remain blank. After some time, verify that you get the oscillations pattern presented in the figure above for the dipolar mode :math:`\ell = 1`.
+
+In your pgstar window should look like the figure below. The bottom right panel shows the mode inertia for the modes of angular degree :math:`\ell = 1`. This oscillating pattern tells us that there is a coupling between the p modes and the g modes and that GYRE predicts that the modes it computes are indeed mixed modes.
+
+.. image:: grid_000330.png
+   :alt: PGplot_mode_inertia
+   :width: 2372
+   :height: 1064
+   :scale: 30%
+   :align: left
 
 .. admonition:: Bonus exercise
 
