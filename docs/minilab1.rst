@@ -25,7 +25,7 @@ Each cross corresponds to an eigenmode computed using GYRE. The modes with low i
 The main goal of today's labs is to study the red giant (RG) star KIC11515377 observed by the *Kepler* satellite from NASA and reproduce the results from `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.
 For this first minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run.
 
-Exercise 1: Setup
+Exercise 0: Setup
 --------
 
 First, download the Minilab 1 work directory here. The ``inlist_project`` file from this working directory has already been edited to model the RG star KIC11515377. It is sets to run from ZAMS and to stop when the effective temperature of the star is lower than $10^{3.5}$. This stopping condition is arbitrary, and we will stop before.
@@ -74,7 +74,7 @@ This step should create the ``star`` executable file. You can run the model, i.e
 A PGstar plot window displaying information about the structure and evolution of the star should appear. Some panels we will activate later on. You can stop the run using the command ``Ctrl+C``.
 Any additional info on the inlist settings can be found in the `MESA docs <https://docs.mesastar.org/en/latest/>`__.
 
-Exercise 2: Running GYRE on the fly
+Exercise 1: Running GYRE on the fly
 --------
 
 As mentioned, we want to observe the variations of the mode inertia as a function of frequency, as the star evolves, in order to identify mixed modes. To do so, we want to run GYRE at each time step during the MESA run. This is done by editing the ``run_star_extras`` file.
@@ -194,7 +194,7 @@ You can edit the ``gyre_mix.in`` to change the range (and units of the range) of
 
 
 
-Exercise 3: Mode inertia
+Exercise 2: Mode inertia
 --------
 
 The last step for this minilab is to plot the mode inertia Eq. (1) to see what it looks like. This equation is already implemented in GYRE, so it can be computed directly using the parameter ``E_norm``. For that, we need to edit the ``inlist_pgstar`` file. This file controls what is plotted in the pgstar window during a MESA run. Take some time to have a look at it. You can notice that there are parameters to control what is plotted but also the size and location of the plots. In order to get the mode inertia plotted, the next lines of code should be added at the end of the file
