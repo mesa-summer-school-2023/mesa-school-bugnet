@@ -2,11 +2,11 @@ Now that we have MESA and GYRE running, we want to investigate the impact of rot
 
 
 
-Uniform rotation
+Exercise 1: Uniform rotation
 --------
 
 Asteroseismology of red giants (RG) has taught us that angular momentum (AM) takes place in stars, but the theory of AM is not able to explain all observations. Generally, AM transport is treated by a combination of advective and diffusive processes (and possibly mechanisms like internal gravity waves generated at the convective core boundary).
-In MESA, the transport of AM is done in a fully diffusive way by solving the rotation profile :math:`\Omega(m)` (with :math:`m` the mass coordinate),
+In MESA, the transport of AM is done in a fully diffusive way by solving the following euqation with rotation profile :math:`\Omega(m)` (with :math:`m` the mass coordinate),
 
 .. math::
 
@@ -16,7 +16,7 @@ In MESA, the transport of AM is done in a fully diffusive way by solving the rot
     \end{split}
 
 Here, :math:`i` is the specific moment of inertia of a shell at mass coordinate :math:`m`, and :math:`\rho` is the local density. The second term on the right-hand side accounts for the change in the radius of the star as it evolves, while the first term describes the actual tranport of AM.
-The efficiency is encompassed in the viscosity :math:`\nu_{\rm AM}`. First, we will set this viscosity to a very high value, such that AM is redistributed almost instanteously, and thus the star rotates as a solid body.
+The efficiency is encompassed in the viscosity :math:`\nu_{\rm AM}(m)`. First, we will set this viscosity to a very high value, such that AM is redistributed almost instanteously, and thus the star rotates as a solid body.
 
 We need to make some small additions to the inlist. Specifically, we need to tell MESA how to deal with rotation.
 
@@ -48,7 +48,7 @@ where :math:`M_\star` and :math:`R_\star` are the mass and radius, respectively.
 
   set_omega_div_omega_crit = .false.
   set_initial_omega_div_omega_crit = .true.
-  new_omega_div_omega_crit = 0.1d0
+  new_omega_div_omega_crit = 0.2d0
 
   num_steps_to_relax_rotation = 50
 
@@ -64,13 +64,14 @@ Now that we've set the options in the ``&star_job`` section, we need to set the 
        uniform_am_nu_non_rot = 1d20 ! In cm^2/s
 
 
+.. note::
 
-The ``run_star_extras.f90`` file has already been modified in ``extras_finish_step`` to terminate when the model reaches :math:`\nu_{\rm max}=180\,\mu`Hz, and to start writing profiles only on the RGB.
+    The ``run_star_extras.f90`` file has already been modified in ``extras_finish_step`` to terminate when the model reaches :math:`\nu_{\rm max}=180\,\mu`Hz, and to start writing profiles only on the RGB.
 
-.. code-block:: console
+    .. code-block:: console
 
-    if (s% nu_max .lt. 250.) s% write_profiles_flag = .true.
-    if (s% nu_max < 180.) extras_finish_step = terminate
+        if (s% nu_max < 250.) s% write_profiles_flag = .true.
+        if (s% nu_max < 180.) extras_finish_step = terminate
 
 
 In the next step, we will be passing the stellar profiles to GYRE. The following lines in the ``&controls`` tell MESA to output also a separate input file for GYRE along with the profiles.
@@ -108,7 +109,7 @@ In this minilab, we will run GYRE stand-alone like you have done during Tuesday'
 
 
 
-AM transport through (magneto)hydrodynamical processes
+Exercise 2: Physical approach
 --------
 
 Now, we want to take a more physical approach and compute the viscosity from the six (magneto)hydrodynamical processes implemented in MESA that can induce turbulence (and thus transport angular momentum).
@@ -131,7 +132,13 @@ In MESA, each process can be turned on and off separately. To enable all of them
         D_GSF_factor = 1
         D_ST_factor  = 1
 
-Run MESA again with this other way of AM transport. Do not forgot to change the name of your output directory through ``log_directory`` in the ``&controls`` section! In the mixing panel of ``PGstar``, you should also be able to see the predicted viscosity (or diffusion coefficient) for each of the six processes.
+Run MESA again with this other way of AM transport.
+
+.. warning::
+
+    Do not forgot to change the name of your output directory through ``log_directory`` in the ``&controls`` section!
+
+In the mixing panel of ``PGstar``, you should also be able to see the predicted viscosity (or diffusion coefficient) for each of the six processes.
 However, because we set ``am_D_mix_factor = 0`` in ``&controls``, we only study the effect of AM transport and not on the transport of chemical elements.
 
 Run GYRE again at the same age (again, remember to provide a different name for the summary file), and compare the pulsations. Could asteroseismology possibly distinguish between these two cases?
