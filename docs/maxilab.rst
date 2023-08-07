@@ -28,7 +28,7 @@ We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the 
 Exercise 0: Setup 
 --------
 As a first step, download and unzip `this
-<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/docs/work_maxi.zip>`__ work directory. 
+<https://github.com/mesa-summer-school-2023/exercises/blob/main/work_maxi.zip>`__ work directory. 
 
 .. tip::
 
