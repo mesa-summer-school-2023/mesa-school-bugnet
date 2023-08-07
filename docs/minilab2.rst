@@ -5,6 +5,7 @@ Now that we have MESA and GYRE running, we want to investigate the impact of rot
 
 
 Exercise 0: Setup
+--------
 
 We start this minilab from a work directory that you can download here.
 
