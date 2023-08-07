@@ -3,7 +3,7 @@
 # -- Project information
 
 project = 'MESA Lab Day 4'
-copyright = '2023, Joey Mombarg, '
+copyright = '2023, Joey Mombarg, Cole Johnston, Arthur Le Saux'
 author = 'Joey Mombarg'
 
 release = '0.1'
