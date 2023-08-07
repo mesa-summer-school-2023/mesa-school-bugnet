@@ -1,11 +1,8 @@
-Minilab 2: Rotation
-===================================
-
 Now that we have MESA and GYRE running, we want to investigate the impact of rotation. All stars rotate - however, describing how rotation impacts the structure and evolution of a star is a complicated business. Rotation induces two major changes to stellar evolution calculations. First, it introduces a new mechanism for transporting angular momentum throughout the star, and second it introduces a new mechanism for transporting chemicals throughout a star. In this Minilab, we want to investigate how we can use MESA to incorporate rotation in our stellar models and how different implementations modify the structure, and hence, the asteroseismic signature of a typical red giant. We will follow two cases: 1) Where we impose a constant viscosity to approximate rigid rotation, and 2) where we impose a rotation rate at the zero-age main-sequence (ZAMS) of 20\% the critical rotation rate. Both of these will require modifications to the standard inlist that we will follow below.
 
 
 
-Approximating uniform rotation with high viscosity
+Uniform rotation
 --------
 
 Asteroseismology of red giants (RG) has taught us that angular momentum (AM) takes place in stars, but the theory of AM is not able to explain all observations. Generally, AM transport is treated by a combination of advective and diffusive processes (and possibly mechanisms like internal gravity waves generated at the convective core boundary).
@@ -15,7 +12,7 @@ In MESA, the transport of AM is done in a fully diffusive way by solving the rot
 
     \begin{split}
     \left(\frac{{\partial \Omega}}{\partial t}\right)_m &= \frac{1}{i}\left( \frac{\partial }{\partial m} \right)_t \left[ (4 \pi r^2 \rho)^2 i \nu_{\rm AM} \left( \frac{\partial \Omega}{\partial m} \right)_t \right] \\
-    &- \frac{ \Omega}{r} \left( \frac{\partial r }{\partial t} \right)_m \left(\frac{{\rm d} \ln i }{{\rm d} \ln r} \right)~~~~~~~~~~~~~~~~~~~(1)
+    &- \frac{ \Omega}{r} \left( \frac{\partial r }{\partial t} \right)_m \left(\frac{{\rm d} \ln i }{{\rm d} \ln r} \right)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(1)
     \end{split}
 
 Here, :math:`i` is the specific moment of inertia of a shell at mass coordinate :math:`m`, and :math:`\rho` is the local density. The second term on the right-hand side accounts for the change in the radius of the star as it evolves, while the first term describes the actual tranport of AM.
@@ -24,6 +21,7 @@ The efficiency is encompassed in the viscosity :math:`\nu_{\rm AM}`. First, we w
 We need to make some small additions to the inlist. Specifically, we need to tell MESA how to deal with rotation.
 
 First, we need to set some flags in the ``&star_job`` section of the inlist so MESA knows that we want to activate rotation.
+
 .. code-block:: console
 
   ! Rotation
@@ -42,7 +40,7 @@ The (Keplerian) critical rotation rate that MESA uses is defined as
 
   \Omega_{\rm crit} = \sqrt{\frac{\Gamma G M_\star}{R_\star^3}}
 
-where :math:`M_\star` and :math:`R_\star` are the mass and radius, respectively. The factor $\Gamma$ takes into radiation pressure and is 1 when the star is well below the Eddington luminosity. Set an initial rotation rate by adding the following lines to the ``&star_job`` section.
+where :math:`M_\star` and :math:`R_\star` are the mass and radius, respectively. The factor :math:`\Gamma` takes into radiation pressure and is 1 when the star is well below the Eddington luminosity. Set an initial rotation rate by adding the following lines to the ``&star_job`` section.
 
 .. code-block:: console
 
@@ -67,7 +65,7 @@ Now that we've set the options in the ``&star_job`` section, we need to set the 
 
 
 
-The ``run_star_extras.f90`` file has already been modified in ``extras_finish_step``to terminate when the model reaches :math:`\nu_{\rm max}=180\,\mu`Hz, and to start writing profiles only on the RGB.
+The ``run_star_extras.f90`` file has already been modified in ``extras_finish_step`` to terminate when the model reaches :math:`\nu_{\rm max}=180\,\mu`Hz, and to start writing profiles only on the RGB.
 
 .. code-block:: console
 
@@ -110,7 +108,7 @@ In this minilab, we will run GYRE stand-alone like you have done during Tuesday'
 
 
 
-Angular momentum transport through (magneto)hydrodynamical processes
+AM transport through (magneto)hydrodynamical processes
 --------
 
 Now, we want to take a more physical approach and compute the viscosity from the six (magneto)hydrodynamical processes implemented in MESA that can induce turbulence (and thus transport angular momentum).
@@ -137,5 +135,3 @@ Run MESA again with this other way of AM transport. Do not forgot to change the 
 However, because we set ``am_D_mix_factor = 0`` in ``&controls``, we only study the effect of AM transport and not on the transport of chemical elements.
 
 Run GYRE again at the same age (again, remember to provide a different name for the summary file), and compare the pulsations. Could asteroseismology possibly distinguish between these two cases?
-
-
