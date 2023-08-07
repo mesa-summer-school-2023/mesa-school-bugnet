@@ -1,7 +1,10 @@
 Now that we have MESA and GYRE running, we want to investigate the impact of rotation. All stars rotate - however, describing how rotation impacts the structure and evolution of a star is a complicated business. Rotation induces two major changes to stellar evolution calculations. First, it introduces a new mechanism for transporting angular momentum throughout the star, and second it introduces a new mechanism for transporting chemicals throughout a star. In this Minilab, we want to investigate how we can use MESA to incorporate rotation in our stellar models and how different implementations modify the structure, and hence, the asteroseismic signature of a typical red giant. We will follow two cases: 1) Where we impose a constant viscosity to approximate rigid rotation, and 2) where we impose a rotation rate at the zero-age main-sequence (ZAMS) of 20\% the critical rotation rate. Both of these will require modifications to the standard inlist that we will follow below.
 
 
- 
+Exercise 0: Setup
+
+We start this minilab from a work directory that you can download here.
+
 Exercise 1: Uniform rotation
 --------
 
@@ -83,7 +86,7 @@ In the next step, we will be passing the stellar profiles to GYRE. The following
     pulse_data_format = 'GYRE'
 
 
-Now, we will make the changes to the GYRE inlist.
+Now, we will make the changes to the GYRE inlist ``gyre_mix.in``.
 In the GYRE inlist, we set
 
 .. code-block:: console
