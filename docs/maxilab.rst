@@ -30,10 +30,6 @@ Exercise 0: Setup
 As a first step, download and unzip `this
 <https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_maxi.zip>`__ work directory. 
 
-.. tip::
-
-    If you want to unpack zip files from your terminal, use ``unzip file.zip``.
-
 At each step of the evolution we want to compute :math:`\left< B_r^2\right>^{1/2}` and store it in the output of the history file. 
 
 Exercise 1: Adding additional history output 
