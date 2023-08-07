@@ -66,13 +66,14 @@ Now that we've set the options in the ``&star_job`` section, we need to set the 
 
 .. note::
 
-    The ``run_star_extras.f90`` file has already been modified in ``extras_finish_step`` to terminate when the model reaches :math:`\nu_{\rm max}=180\,\mu`Hz, and to start writing profiles only on the RGB.
+    The ``run_star_extras.f90`` file has already been modified in ``extras_finish_step`` to terminate when the model reaches :math:`\nu_{\rm max}=180\,\mu{\rm Hz}`, and to start writing profiles only on the RGB.
 
     .. code-block:: console
 
         if (s% nu_max < 250.) s% write_profiles_flag = .true.
         if (s% nu_max < 180.) extras_finish_step = terminate
 
+Look at the rotation profile ``log_omega`` in the PGplot. Is the rotation indeed uniform?
 
 In the next step, we will be passing the stellar profiles to GYRE. The following lines in the ``&controls`` tell MESA to output also a separate input file for GYRE along with the profiles.
 
@@ -99,7 +100,7 @@ and give a name for the output (summary) file
 
 .. code-block:: console
 
-     summary_file = 'xxx_const_visc.data'
+     summary_file = 'xxx_const_visc.summary'
 
 In this minilab, we will run GYRE stand-alone like you have done during Tuesday's lab. To run GYRE, use
 
@@ -107,6 +108,7 @@ In this minilab, we will run GYRE stand-alone like you have done during Tuesday'
 
     $GYRE_DIR/bin/gyre gyre_mix.in
 
+To have a quick inspection of the GYRE summary file, we will use the online `MESA explorer <https://billwolf.space/mesa-explorer/>`__ designed by Bill Wolf. Upload your summary file, and plot ``n_pg`` (the radial order) vs. ``Re(freq)`` (the real part of the mode frequency).
 
 
 Exercise 2: Physical approach
@@ -132,7 +134,7 @@ In MESA, each process can be turned on and off separately. To enable all of them
         D_GSF_factor = 1
         D_ST_factor  = 1
 
-Run MESA again with this other way of AM transport.
+Run MESA again with this other way of AM transport. Do you see any changes in the rotation profile?
 
 .. warning::
 
@@ -141,4 +143,5 @@ Run MESA again with this other way of AM transport.
 In the mixing panel of ``PGstar``, you should also be able to see the predicted viscosity (or diffusion coefficient) for each of the six processes.
 However, because we set ``am_D_mix_factor = 0`` in ``&controls``, we only study the effect of AM transport and not on the transport of chemical elements.
 
-Run GYRE again at the same age (again, remember to provide a different name for the summary file), and compare the pulsations. Could asteroseismology possibly distinguish between these two cases?
+Run GYRE again at the same age (again, remember to provide a different name for the summary file!), and compare the pulsations. Upload also this summary file to `MESA explorer <https://billwolf.space/mesa-explorer/>`__ and toggle between the two.
+Could asteroseismology possibly distinguish between these two cases?
