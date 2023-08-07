@@ -40,7 +40,7 @@ The (Keplerian) critical rotation rate that MESA uses is defined as
 
   \Omega_{\rm crit} = \sqrt{\frac{\Gamma G M_\star}{R_\star^3}}
 
-where :math:`M_\star` and :math:`R_\star` are the mass and radius, respectively. The factor :math:`\Gamma` takes into radiation pressure and is 1 when the star is well below the Eddington luminosity. Set an initial rotation rate by adding the following lines to the ``&star_job`` section.
+where :math:`M_\star` and :math:`R_\star` are the mass and radius, respectively. The factor :math:`\Gamma` takes into account the radiation pressure and is 1 when the star is well below the Eddington luminosity. Set an initial rotation rate by adding the following lines to the ``&star_job`` section.
 
 .. code-block:: console
 
