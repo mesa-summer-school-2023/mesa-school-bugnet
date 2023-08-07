@@ -14,9 +14,7 @@ MESA labs for day 4 of the `MESA@Konkoly <https://mesahub.github.io/summer-schoo
     The solutions to the labs can be found here.
 
     Minilab 1
-
     Minilab 2
-
     Maxilab
 
 
