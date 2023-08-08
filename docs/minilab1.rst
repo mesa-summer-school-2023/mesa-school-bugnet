@@ -53,7 +53,7 @@ Then we specify the desired composition with
     initial_zfracs = 3
 
 The last parameter ``initial_zfracs = 3`` sets the metals fractions abundances according to Grevesse & Sauval 1998 (GS98). We then set the corresponding opacities in the ``&kap`` section.
-Because the final objective is to compare with observations, we have also tuned the atmopsheric boundary conditions with
+Because the final objective is to compare with observations, we have to also tune the atmopsheric boundary conditions in ``&controls`` by adding 
 
 .. code-block:: console
 
