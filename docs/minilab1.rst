@@ -28,7 +28,8 @@ For this first minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` s
 Exercise 0: Setup
 --------
 
-First, download the Minilab 1 work directory here and unpack. 
+First, download the Minilab 1 work directory `here
+<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1.zip>`__ and unpack. 
 
 .. tip::
 
