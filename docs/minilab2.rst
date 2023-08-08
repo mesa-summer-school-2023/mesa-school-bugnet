@@ -7,7 +7,8 @@ Now that we have MESA and GYRE running, we want to investigate the impact of rot
 Exercise 0: Setup
 --------
 
-We start this minilab from a work directory that you can download here.
+We start this minilab from a work directory that you can download `here
+<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini2.zip>`__.
 
 Exercise 1: Uniform rotation
 --------
