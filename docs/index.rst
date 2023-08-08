@@ -26,6 +26,8 @@ Lecturer: Lisa Bugnet
 
 Teaching Assistents: Arthur Le Saux, Cole Johnston, and Joey Mombarg
 
+Part of Minilab 1 is inspired on the MESA lab from last year's school by Earl Bellinger. 
+
 
 Contents
 --------
