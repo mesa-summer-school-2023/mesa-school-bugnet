@@ -190,7 +190,7 @@ Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`
 
 The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes, you can stop the run using ``Ctrl+C``.
 
-You can edit the ``gyre_mix.in`` to change the range (and units of the range) of frequencies of the modes computed by GYRE. To do so change the parameters
+You can edit the ``gyre_mix.in`` to change the range (and units of the range) of frequencies of the modes computed by GYRE. To do so change the parameters in ``&scan``
 
 .. code-block:: console
 
