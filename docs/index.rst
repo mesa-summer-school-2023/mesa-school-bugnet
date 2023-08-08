@@ -13,7 +13,7 @@ MESA labs for day 4 of the `MESA@Konkoly <https://mesahub.github.io/summer-schoo
 
     The solutions to the labs can be found here.
 
-    Minilab 1
+    `Minilab 1 <https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1_solution.zip>`__
 
     `Minilab 2 <https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini2_solution.zip>`__
 
