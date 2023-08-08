@@ -195,7 +195,7 @@ Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`
 
     Found mode: index, l, m, n_p, n_g, E_norm, nu = 130 1 0 3 82 -79 2.285E-02 125.57
 
-The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes, you can stop the run using ``Ctrl+C``.
+The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes, you can stop the run using ``Ctrl+C``. GYRE should be called every 2 steps. 
 
 You can edit the ``gyre_mix.in`` to change the range (and units of the range) of frequencies of the modes computed by GYRE. To do so change the parameters in ``&scan``
 
