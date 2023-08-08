@@ -35,7 +35,7 @@ First, download the Minilab 1 work directory `here
 
     If you want to unpack zip files from your terminal, use ``unzip file.zip``.
 
-The ``inlist_project`` file from this working directory has already been edited to model the RG star KIC11515377. It is set to run from ZAMS and to stop when the effective temperature of the star is lower than :math`10^{3.5}`K. This stopping condition is arbitrary, and we will stop before.
+The ``inlist_project`` file from this working directory has already been edited to model the RG star KIC11515377. It is set to run from ZAMS and to stop when the effective temperature of the star is lower than :math`10^{3.5}` K. This stopping condition is arbitrary, and we will stop before.
 The composition of the star is set to the values given by Li et al. (2022, Nature). To do so, we set an initial composition that is uniform in the star by setting to true the following parameter in the ``&star_job`` section of the ``inlist_project``.
 
 .. code-block:: console
