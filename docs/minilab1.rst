@@ -53,6 +53,15 @@ Then we specify the desired composition with
     initial_zfracs = 3
 
 The last parameter ``initial_zfracs = 3`` sets the metals fractions abundances according to Grevesse & Sauval 1998 (GS98). We then set the corresponding opacities in the ``&kap`` section.
+
+.. code-block:: console
+
+    use_Zbase_for_Type1 = .false.
+    kap_file_prefix = 'gs98'
+    kap_lowT_prefix = 'lowT_fa05_gs98'
+    kap_CO_prefix = 'gs98_co'
+    Zbase = 0.031  ! reference metallicity necessary to calculate element variations
+
 Because the final objective is to compare with observations, we have to also tune the atmopsheric boundary conditions in ``&controls`` by adding 
 
 .. code-block:: console
