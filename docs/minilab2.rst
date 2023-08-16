@@ -84,7 +84,7 @@ Now that we've set the options in the ``&star_job`` section, we need to set the 
 Now, do ``./clean && ./mk`` and run ``./rn``.
 Look at the rotation profile ``log_omega`` in the PGplot. Is the rotation indeed uniform?
 
-In the next step, we will be passing the stellar profiles to GYRE. The following lines in the ``&controls`` tell MESA to output also a separate input file for GYRE along with the profiles.
+In the next step, we will be passing the stellar profiles to GYRE. The following lines in the ``&controls`` tell MESA to output also a separate input file for GYRE along with the profiles (you cannot output pulse data without also outputting the profiles).
 
 .. code-block:: console
 
