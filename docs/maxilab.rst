@@ -2,7 +2,7 @@ Maxilab: Measuring the magnetic field
 ===================================
 
 
-Under the influence of rotation, pulsation modes with the same spherical degree, :math:`\ell`, (number of surface nodal lines), split into multiplets, :math:`m = -\ell, -(\ell-1), ..., \ell-1, \ell`, where the azimuthal order :math:`m` indicates the number of surface nodal lines intersecting the rotational axis. On top of that, the presence of a magnetic field in the core can introduce asymmetries in the splittings (difference in frequency) of these pulsation modes. 
+Under the influence of rotation, pulsation modes with the same spherical degree, :math:`\ell`, (number of surface nodal lines), split into multiplets, :math:`m = -\ell, -(\ell-1), ..., \ell-1, \ell`, where the azimuthal order :math:`m` indicates the number of surface nodal lines intersecting the rotational axis. On top of that, the presence of a magnetic field in the core can introduce asymmetries in the splittings (difference in frequency) of these pulsation modes.
 In this Maxilab, we are going to infer the internal magnetic field of the red giant (RG) KIC11515377, observed with the NASA *Kepler* mission. We follow the methodology of `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.  The squared radial magnetic field averaged in the horizontal direction is inferred by,
 
 .. math::
@@ -23,16 +23,16 @@ The denominator in the integral relates to the asymptotic period spacing of mode
 
     \Delta \Pi_{\ell = 1} = \frac{2 \pi^2}{\sqrt{2}}\left( \int \frac{N}{r}dr \right)^{-1}.~~~~~~~~~~~(3)
 
-We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the ``run_star_extras.f90``. 
+We are going to compute the quantity :math:`\mathcal{I}` of a MESA model in the ``run_star_extras.f90``.
 
-Exercise 0: Setup 
+Exercise 0: Setup
 --------
 As a first step, download and unzip `this
-<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_maxi.zip>`__ work directory. 
+<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_maxi.zip>`__ work directory.
 
-At each step of the evolution we want to compute :math:`\left< B_r^2\right>^{1/2}` and store it in the output of the history file. 
+At each step of the evolution we want to compute :math:`\left< B_r^2\right>^{1/2}` and store it in the output of the history file.
 
-Exercise 1: Adding additional history output 
+Exercise 1: Adding additional history output
 --------
 Prepare in the ``run_star_extras.f90`` three additional history columns named ``I``, ``Br_mean``, and ``Delta_Pi1``. Set the correct number of additional columns in the ``how_many_extra_history_columns`` function, and add the following to ``data_for_extra_history_columns`` for each additional column,
 
@@ -44,13 +44,32 @@ Prepare in the ``run_star_extras.f90`` three additional history columns named ``
 You can set the values to 0 for now.
 Do a ``./clean`` and ``./mk`` and check this works.
 
+
 Exercise 2: Integrating stellar quatities
 --------
+In the next exercises, we are going to some Fortran coding in the ``run_star_extras.f90`` file. In Fortran, you must declare the variables you are going to use. Here is a simple example,
+
+.. code:: fortran
+
+    subroutine count(xin, xout)
+    integer, intent(in)  :: xin  ! Input parameter
+    integer, intent(out) :: xout ! Output parameter
+    integer :: k                 ! This only exists within this subroutine.
+
+    do k=1, 10     ! Loop over k = 1, 2, 3,...,10.
+      write(*,*) 'xin + ', k, ' = ', xin + k ! Fortran does not care about indentation (like Python does), but it makes the code easier to read.
+    end do         ! Close the do-loop.
+
+    xout = xin + k
+    end subroutine count
+
+Besides ``integer``, we will also need to declare floats of double precision with ``real(dp)``.
+
 The first step is to compute the two integrals in Eq (2). For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
 
 .. code:: fortran
 
-    double precision, allocatable :: brunt_N(:)
+    real(dp), allocatable :: brunt_N(:)
 
     allocate(brunt_N(s% nz))
 
@@ -70,7 +89,7 @@ We can then access variables part of the ``star_info`` structure such as the rad
     s% rho
     s% brunt_N2
 
-You can check out ``MESA_DIR/star_data/public/star_data_work.inc`` to see what variables are accessible this way.
+You can check out ``$MESA_DIR/star_data/public/star_data_step_work.inc`` to see what variables are accessible this way.
 Moreover, ``s% r(k)`` will give you the k-th element of the array.
 
 Compute :math:`N` from the values of :math:`N^2` defined in MESA, but set negative values to zero.
@@ -90,7 +109,7 @@ If your model has a high enough spatial resolution, you can assume,
 
 .. math::
 
-    \int x\,{\rm d}x \approx \sum_i x_i\,\Delta x_i,
+    \int f(x)\,{\rm d}x \approx \sum_i f(x_i)\,\Delta x_i,
 
 where the index :math:`i` runs over the cells.
 First, define two quantities in which you store the values of the two integrals. For the summation (integral), you will have to something like
@@ -115,7 +134,7 @@ Once you have computed :math:`\mathcal{I}`, write this value out to the first ex
 .. tip::
 
    If you are really stuck, have a look to part of the solutions at the bottom of this page.
-    
+
 Exercise 3: Compute the internal magnetic field
 --------
 Next, we want to pass on the value of :math:`\delta \omega_g` to the ``run_star_extras.f90``. In your inlist, you can set
@@ -130,9 +149,9 @@ to a value that you can then access in the ``run_star_extras.f90`` through,
 
     s% x_ctrl(1)
 
-Add a control in your inlist to do this. The observed value for KIC11515377 is :math:`\delta \omega_g / (2 \pi) = 126` nHz. The value of :math:`\nu_{\rm max}` you can get from ``star_info``. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_work.inc`` you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
+Add a control in your inlist to do this. The observed value for KIC11515377 is :math:`\delta \omega_g / (2 \pi) = 126` nHz. The value of :math:`\nu_{\rm max}` you can get from ``star_info``. Pay attention to the correct units. In ``MESA_DIR/star_data/public/star_data_step_work.inc`` you can also find the units of each quantity in ``star_info``. Unless specified, MESA works in cgs units.
 
-Finally, write :math:`\left< B_r^2\right>^{1/2}` and :math:`\Delta \Pi_1` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100 kG.
+Finally, write :math:`\left< B_r^2\right>^{1/2}` and :math:`\Delta \Pi_1` also to your history file. Recompile and verify that on the RGB you find an average magnetic field of the order of 100 kG. (Thus use something like ``write(*,*) 'Br_mean [kG] = ', Br_mean`` to print its value in the ``run_star_extras.f90``.)
 
 Exercise 4: Find the best-matching model
 --------
@@ -160,18 +179,18 @@ In addition, also define a global variable which stores the previous value of :m
     The figure at the bottom shows the flow of the ``run_star_extras.f90``, taken from the MESA docs.
     Have a look at the flowchart and see which subroutine is only called once at the start of a run.
 
-Lastly, check in the flowchart where MESA decides to keep going or terminate. Here, add a condition that will terminate the run if the new :math:`\chi^2` is larger than the previous value. Else, update the previous value to the new one. To make sure we are on the RG branch, add the following second condition
+Lastly, check in the flowchart where MESA decides to keep going or terminate. Here, add a condition that will terminate the run if the new :math:`\chi^2` is larger than the previous value. Else, update the previous value to the new one. Also print out the value of :math:`\chi^2` so you verify if it works. To make sure we are on the RG branch, add the following second condition
 
 .. code:: console
 
     safe_log10(s% Teff) < 3.7
 
 Add to your PGstar inlist the target values, so that you can see how close your models gets to the observations. To do this, have a look at the controls in ``inlist_pgstar`` that are currently commented out. This is similar to what we did in Minilab 1, except now we are plotting history output instead of profile output.
-Pick a value for the initial mass from the spreadsheet and note down the lowest found :math:`\chi^2` value and the corresponding value of the internal magnetic field (in kG).
+Pick a value for the initial mass from the `spreadsheet <https://docs.google.com/spreadsheets/d/1KrAoaLLOtSo-p8H_E2XO77FEUni6PugNR7jKK6_I71c/edit#gid=1353904413>`__ and note down the lowest found :math:`\chi^2` value and the corresponding value of the internal magnetic field (in kG).
 
-   
 
-.. image:: flowchart_run_star_extras.png
+
+.. image:: flowchart_rse_maxi.png
    :alt: Flowchart
    :width: 1275
    :height: 1650
@@ -189,40 +208,46 @@ Pick a value for the initial mass from the spreadsheet and note down the lowest 
            integer, intent(in) :: id, n
            character (len=maxlen_history_column_name) :: names(n)
            real(dp) :: vals(n), integral_N, integral_N3, I, mu_0, Br_mean
+           real(dp):: delta_omega_g, omega_max, Delta_Pi1, Delta_Pi1_obs, nu_max_obs
+
            integer, intent(out) :: ierr
            type (star_info), pointer :: s
-           double precision, allocatable :: brunt_N(:)
+           real(dp), allocatable :: brunt_N(:)
            integer :: k
            ierr = 0
            call star_ptr(id, s, ierr)
            if (ierr /= 0) return
            mu_0 = 4d-6*pi
 
-           ! note: do NOT add the extras names to history_columns.list
-           ! the history_columns.list is only for the built-in history column options.
-           ! it must not include the new column names you are adding here.
-
            allocate(brunt_N(s% nz))
+
            names(1) = 'I'
            names(2) = 'Br_mean'
            names(3) = 'Delta_Pi1'
+
            brunt_N = sqrt(max(0._dp,s% brunt_N2))
            integral_N3 = 0.0_dp
            integral_N = 0.0_dp
+
            do k = 1, s%nz-1
              integral_N3 = integral_N3 + (brunt_N(k)**3/(s% rho(k)))*abs(s% rmid(k+1) - s% rmid(k)) / (s% r(k))**3
              integral_N  = integral_N + brunt_N(k)*abs(s% rmid(k+1) - s% rmid(k)) / s% r(k)
            end do
+
            I = integral_N3 / integral_N
            vals(1) = I
            omega_max = 2 * pi * s% nu_max * 1d-6
+           delta_omega_g = s% x_ctrl(1)
            Br_mean = sqrt(mu_0 * (2*pi*delta_omega_g*1d-9) * omega_max**3 / I) ! In kG.
            vals(2) = Br_mean
            Delta_Pi1 = (2._dp*pi**2)/integral_N / (sqrt(2._dp))
            vals(3) = Delta_Pi1
            write(*,*) 'Br_mean [kG] = ', Br_mean, 'Delta_Pi1 [s] = ', Delta_Pi1, 'nu_max [uHz] = ', s% nu_max, 'delta_nu [uHz]', s% delta_nu,   'I = ', I
-           chi2 = (Delta_Pi1 - s% x_ctrl(2))**2 + (s% nu_max - s% x_ctrl(3))**2
+           Delta_Pi1_obs = s% x_ctrl(2)
+           nu_max_obs    = s% x_ctrl(3)
+           chi2 = (Delta_Pi1 - Delta_Pi1_obs)**2 + (s% nu_max - nu_max_obs)**2
            write(*,*) 'chi2', chi2
+
            deallocate(brunt_N)
 
         end subroutine data_for_extra_history_columns
