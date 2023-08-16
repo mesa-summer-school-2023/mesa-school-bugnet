@@ -1,16 +1,16 @@
 Minilab 1: Asteroseismology of mixed modes
 ===================================
 
-Stars oscillate due to waves propagating in their interiors. The waves we are interested in, in the context of this project, i.e. the one responsible for solar-like oscillations (see e.g. García & Ballot 2019), are excited by turbulent convection. As they propagate, these waves interfere and form normal modes of oscillations, i.e. standing waves, which frequency depends on the internal structure of the star. For this reason, they are called *eigenmodes* of the star, the associated frequencies are the *eigenfrequencies*, and we can also calculate the *eigenfunctions*, i.e. the variation of the waves' perturbation with radius. These are obtained by solving the equations of stellar oscillations (see XXX, lecture?). Depending on the frequency of the wave, we distinguish two kind of waves: internal gravity waves (low frequency) and acoustic waves (high frequency). Modes associated with internal gravity waves are g modes (these are the ones studied during Tuesday labs) and the ones associated with acoustic waves are p modes. Each mode is identified with a combination of three integers: the angular, or spherical harmonic, degree :math:`\ell`, the azimuthal order :math:`m` and the radial order :math:`n`.
+Stars oscillate due to waves propagating in their interiors. The waves we are interested in, in the context of this project, i.e. the ones responsible for solar-like oscillations (see e.g. García & Ballot 2019), are excited by turbulent convection. As they propagate, these waves interfere and form normal modes of oscillations, i.e. standing waves, the frequencies of which depend on the internal structure of the star. For this reason, they are called *eigenmodes* of the star, the associated frequencies are the *eigenfrequencies*, and we can also calculate the *eigenfunctions*, i.e. perturbations to the structure of the star. These are obtained by solving the equations of stellar oscillations (see e.g. `Unno et al (1989) <https://ui.adsabs.harvard.edu/abs/1989nos..book.....U/abstract>`__ or `Aerts et al. (2010) <https://ui.adsabs.harvard.edu/abs/2010aste.book.....A/abstract>`__). Depending on the frequency of the wave, we distinguish two kind of waves: buoyancy waves (low frequency) and acoustic waves (high frequency). Modes with the buoyancy force as the restoring force are gravity (g) modes (these are the ones studied during Tuesday's labs) and the ones with the pressure force as the restoring force are pressure (p) modes. Each mode is identified with a combination of three integers: the angular, or spherical harmonic, degree :math:`\ell`, the azimuthal order :math:`m` and the radial order :math:`n`.
 
-This first minilab focuses on the coupling between p and g modes, i.e. mixed modes, in a red giant star model. These modes are very important because due to this coupling they allow to probe the entire interior of stars. To illustrate this coupling, a useful diagnostic is to look at the normalised mode inertia E, which is defined as (see e.g. Eq. (43) of Hekker & Christensen-Dalsgaard 2017)
+This first minilab focuses on the coupling between p and g modes, i.e. mixed modes, in a red giant stellar model. These modes are very important because due to this coupling they probe the entire interior of stars. To illustrate this coupling, a useful diagnostic is to look at the normalised mode inertia E, which is defined as (see e.g. Eq. 43 of Hekker & Christensen-Dalsgaard 2017)
 
 .. math::
 
     \mathrm{E} = \frac{\int_0^{M_{\rm star}} \left[|\xi_r(r)|^2 + \ell \left(\ell + 1 \right) |\xi_{\rm h}(r)|^2 \right] \mathrm{d} M}{M_{\rm star} \left[|\xi_r(R_{\rm star})|^2
     + \ell \left(\ell + 1 \right) |\xi_{\rm h}(R_{\rm star})|^2 \right]}~~~~~~~~~~~~(1)
 
-with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photospheric radius of the star, :math:`\xi_r` and :math:`\xi_{\rm h}` the radial and horizontal displacements associated with the mode, :math:`\ell` the angular degree from the spherical harmonics and :math:`\mathrm{d}M = 4\pi \rho r^2 \mathrm{d}r` the mass enclose in the sphere between :math:`r` and :math:`r + \mathrm{d}r`. For mixed modes, the mode inertia presents a typical oscillating pattern as illustrated in the figure below, which present the inertia :math:`E` of mixed modes as a function of frequency.
+with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photospheric radius of the star, :math:`\xi_r` and :math:`\xi_{\rm h}` the radial and horizontal displacements associated with the mode, :math:`\ell` the angular degree from the spherical harmonics and :math:`\mathrm{d}M = 4\pi \rho r^2 \mathrm{d}r` the mass enclosed in the sphere between :math:`r` and :math:`r + \mathrm{d}r`. For mixed modes, the mode inertia presents a typical oscillating pattern as illustrated in the figure below, which presents the inertia :math:`E` of mixed modes as a function of frequency.
 
 .. image:: mode_inertia_profile30_f50-150.png
    :alt: Mode_inertia
@@ -29,7 +29,13 @@ Exercise 0: Setup
 --------
 
 First, download the Minilab 1 work directory `here
-<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1.zip>`__ and unpack. 
+<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1.zip>`__ and unpack.
+
+.. raw:: html
+
+    <a href="https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1.zip" target="_blank">
+     <strong>Download work directory</strong>
+    </a>
 
 .. tip::
 
@@ -63,7 +69,7 @@ The last parameter ``initial_zfracs = 3`` sets the metals fractions abundances a
     kap_CO_prefix = 'gs98_co'
     Zbase = 0.031  ! reference metallicity necessary to calculate element variations
 
-Because the final objective is to compare with observations, we have to also tune the atmopsheric boundary conditions in ``&controls`` by adding 
+Because the final objective is to compare with observations, we have to also tune the atmopsheric boundary conditions in ``&controls`` by adding
 
 .. code-block:: console
 
@@ -181,7 +187,7 @@ Next, in order to run GYRE we have added a subroutine ``run_gyre`` at the end of
     end subroutine run_gyre
 
 
-This subroutine runs GYRE on a given MESA model identified with the variable ``id``. First, the function ``star_get_pulse_data`` extract from the MESA model the data required for pulsation analysis. These data are separated in two arrays: ``global_data`` and ``point_data``. Next, the function ``gyre_set_model`` sends these data to GYRE. Then, with the function ``gyre_get_modes``, GYRE actually computes the eigenmodes of the stellar model for angular degree :math:`\ell = 1`. In this function the first integer indicates the angular degree to compute, it can be modified to get other modes. This function takes as an argument ``process_mode``, which is the last subroutine we have defined. It means that when executing the function ``gyre_get_modes``, MESA calls and execute ``process_mode``. Thanks to this function, we can decide what GYRE outputs are. Here, we are interested in the frequencies and the inertia of the modes, and we store them in the global arrays ``frequencies(:,:)`` and ``inertias(:,:)``.
+This subroutine runs GYRE on a given MESA model identified with the variable ``id``. First, the function ``star_get_pulse_data`` extracts from the MESA model the data required for pulsation analysis. These data are separated in two arrays: ``global_data`` and ``point_data``. Next, the function ``gyre_set_model`` sends these data to GYRE. Then, with the function ``gyre_get_modes``, GYRE actually computes the eigenmodes of the stellar model for angular degree :math:`\ell = 1`. In this function the first integer indicates the angular degree to compute, it can be modified to get other modes. This function takes as an argument ``process_mode``, which is the last subroutine we have defined. It means that when executing the function ``gyre_get_modes``, MESA calls and executes ``process_mode``. Thanks to this function, we can decide what GYRE outputs are. Here, we are interested in the frequencies and the inertia of the modes, and we store them in the global arrays ``frequencies(:,:)`` and ``inertias(:,:)``.
 
 Now that we have set up GYRE, it is ready to run during a MESA run, the last thing to do is to set:
 
@@ -196,7 +202,7 @@ Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`
 
     Found mode: index, l, m, n_p, n_g, E_norm, nu = 130 1 0 3 82 -79 2.285E-02 125.57
 
-The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes, you can stop the run using ``Ctrl+C``. GYRE should be called every 2 steps. 
+The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes (which is after :math:`\log T_{\rm eff} < 3.7`), you can stop the run using ``Ctrl+C``. GYRE should be called every 2 steps.
 
 You can edit the ``gyre_mix.in`` to change the range (and units of the range) of frequencies of the modes computed by GYRE. To do so change the parameters in ``&scan``
 
@@ -206,7 +212,9 @@ You can edit the ``gyre_mix.in`` to change the range (and units of the range) of
     freq_max = 150
     freq_units = 'UHZ'
 
+.. tip::
 
+    If you plan to use GYRE for your science, it is good to know there is a `support forum <http://user.astro.wisc.edu/~townsend/gyre-forums/>`__ where you can find answers to errors or post a question yourself.
 
 Exercise 2: Mode inertia
 --------
