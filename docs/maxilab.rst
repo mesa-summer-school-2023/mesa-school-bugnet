@@ -47,7 +47,7 @@ Do a ``./clean`` and ``./mk`` and check this works.
 
 Exercise 2: Integrating stellar quatities
 --------
-In the next exercises, we are going to some Fortran coding in the ``run_star_extras.f90`` file. In Fortran, you must declare the variables you are going to use. Here is a simple example,
+In the next exercises, we are going to some Fortran coding in the ``run_star_extras.f90`` file. In Fortran, you must declare the variables you are going to use. Here is a simple example.
 
 .. code:: fortran
 
@@ -62,7 +62,7 @@ In the next exercises, we are going to some Fortran coding in the ``run_star_ext
     
         xout = xin + k
     end subroutine count
-
+This subroutine takes a value ``xin`` as input, then prints its value plus 1, 2, ..., 10, and returns a variable ``xout = xin + 10``.
 Besides ``integer``, we will also need to declare floats of double precision with ``real(dp)``.
 
 The first step is to compute the two integrals in Eq (2). For the Brunt-Väisälä frequency, we need to first ensure it is zero in convective regions and so we compute a new array with all elements >0. A new array of a variable length is defined as follows,
