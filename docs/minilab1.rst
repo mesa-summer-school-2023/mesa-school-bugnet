@@ -29,7 +29,7 @@ Exercise 0: Setup
 --------
 
 First, download the Minilab 1 work directory `here
-<work_mini1.zip>`__ and unpack.
+<https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/docs/work_mini1.zip>`__ and unpack.
 
 .. raw:: html
 
