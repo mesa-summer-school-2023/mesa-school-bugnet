@@ -14,7 +14,7 @@ Exercise 1: Uniform rotation
 --------
 
 Asteroseismology of red giants (RG) has taught us that angular momentum (AM) takes place in stars, but the theory of AM is not able to explain all observations. Generally, AM transport is treated by a combination of advective and diffusive processes (and possibly mechanisms like internal gravity waves generated at the convective core boundary).
-In MESA, the transport of AM is done in a fully diffusive way by solving the following euqation with rotation profile :math:`\Omega(m)` (with :math:`m` the mass coordinate),
+In MESA, the transport of AM is done in a fully diffusive way by solving the following equation with rotation profile :math:`\Omega(m)` (with :math:`m` the mass coordinate),
 
 .. math::
 
@@ -23,7 +23,7 @@ In MESA, the transport of AM is done in a fully diffusive way by solving the fol
     &- \frac{ \Omega}{r} \left( \frac{\partial r }{\partial t} \right)_m \left(\frac{{\rm d} \ln i }{{\rm d} \ln r} \right)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(1)
     \end{split}
 
-Here, :math:`i` is the specific moment of inertia of a shell at mass coordinate :math:`m`, and :math:`\rho` is the local density. The second term on the right-hand side accounts for the change in the radius of the star as it evolves, while the first term describes the actual tranport of AM.
+Here, :math:`i` is the specific moment of inertia of a shell at mass coordinate :math:`m`, and :math:`\rho` is the local density. The second term on the right-hand side accounts for the change in the radius of the star as it evolves, while the first term describes the actual transport of AM.
 The efficiency is encompassed in the viscosity :math:`\nu_{\rm AM}(m)`. First, we will set this viscosity to a very high value, such that AM is redistributed almost instanteously, and thus the star rotates as a solid body.
 
 We need to make some small additions to the inlist. Specifically, we need to tell MESA how to deal with rotation.
@@ -39,7 +39,7 @@ First, we need to set some flags in the ``&star_job`` section of the inlist so M
   change_initial_rotation_flag = .true.
 
 
-We tell MESA that we want to set a new rotation rate, but we only want to set a new rotation rate at the beginning of the run. Therefore, we set the ``change_ initial_rotation_flag`` to  ``.true.``.
+We tell MESA that we want to set a new rotation rate, but we only want to set a new rotation rate at the beginning of the run. Therefore, we set the ``change_initial_rotation_flag`` to  ``.true.``.
 
 Instead of doing complicated maths to figure out what the appropriate rotation rate is in radians per second, we will utilise the functionality of MESA to set the rotation rate as a fraction of the critical rotation rate.
 The (Keplerian) critical rotation rate that MESA uses is defined as
@@ -81,6 +81,7 @@ Now that we've set the options in the ``&star_job`` section, we need to set the 
         if (s% nu_max < 250.) s% write_profiles_flag = .true.
         if (s% nu_max < 180.) extras_finish_step = terminate
 
+Now, do ``./clean && ./mk`` and run ``./rn``.
 Look at the rotation profile ``log_omega`` in the PGplot. Is the rotation indeed uniform?
 
 In the next step, we will be passing the stellar profiles to GYRE. The following lines in the ``&controls`` tell MESA to output also a separate input file for GYRE along with the profiles.
@@ -98,7 +99,7 @@ In the GYRE inlist, we set
 
      Omega_rot_source = 'MODEL'
 
-Using this option, GYRE will use the rotation profile of the MESA model to account for the effect of rotation on the stellar pulsations. Next, tell GYRE which MESA model to use as input
+Using this option, GYRE will use the rotation profile of the MESA model to account for the effect of rotation on the stellar pulsations. Next, tell GYRE to use the last MESA model as input
 
 .. code-block:: console
 
@@ -114,7 +115,7 @@ In this minilab, we will run GYRE stand-alone like you have done during Tuesday'
 
 .. code-block:: console
 
-    $GYRE_DIR/bin/gyre gyre_mix.in
+    $GYRE_DIR/bin/gyre gyre_mix_minilab2.in
 
 To have a quick inspection of the GYRE summary file, we will use the online `MESA explorer <https://billwolf.space/mesa-explorer/>`__ designed by Bill Wolf. Upload your summary file, and plot ``n_pg`` (the radial order) vs. ``Re(freq)`` (the real part of the mode frequency).
 
@@ -135,12 +136,12 @@ In MESA, each process can be turned on and off separately. To enable all of them
 
 .. code-block:: console
 
-        D_DSI_factor = 1
-        D_SH_factor  = 1
-        D_SSI_factor = 1
-        D_ES_factor  = 1
-        D_GSF_factor = 1
-        D_ST_factor  = 1
+        D_DSI_factor = 1 ! Dynamical shear instability
+        D_SH_factor  = 1 ! Solberg-Høiland instability
+        D_SSI_factor = 1 ! Secular shear instability
+        D_ES_factor  = 1 ! Eddington-Sweet circulation
+        D_GSF_factor = 1 ! Goldreich-Schubert-Fricke instability
+        D_ST_factor  = 1 ! Spuit-Tayler dynamo
 
 Run MESA again with this other way of AM transport. Do you see any changes in the rotation profile?
 
