@@ -52,15 +52,15 @@ In the next exercises, we are going to some Fortran coding in the ``run_star_ext
 .. code:: fortran
 
     subroutine count(xin, xout)
-    integer, intent(in)  :: xin  ! Input parameter
-    integer, intent(out) :: xout ! Output parameter
-    integer :: k                 ! This only exists within this subroutine.
-
-    do k=1, 10     ! Loop over k = 1, 2, 3,...,10.
-      write(*,*) 'xin + ', k, ' = ', xin + k ! Fortran does not care about indentation (like Python does), but it makes the code easier to read.
-    end do         ! Close the do-loop.
-
-    xout = xin + k
+        integer, intent(in)  :: xin  ! Input parameter
+        integer, intent(out) :: xout ! Output parameter
+        integer :: k                 ! This only exists within this subroutine.
+    
+        do k=1, 10     ! Loop over k = 1, 2, 3,...,10.
+          write(*,*) 'xin + ', k, ' = ', xin + k ! Fortran does not care about indentation (like Python does), but it makes the code easier to read.
+        end do         ! Close the do-loop.
+    
+        xout = xin + k
     end subroutine count
 
 Besides ``integer``, we will also need to declare floats of double precision with ``real(dp)``.
