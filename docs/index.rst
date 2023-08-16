@@ -11,7 +11,7 @@ MESA labs for day 4 of the `MESA@Konkoly <https://mesahub.github.io/summer-schoo
 
 .. admonition:: Solutions
 
-    The solutions to the labs can be found here.
+    The solutions to the labs can be found here. Click on the button "Download raw file" on the right next to the "Raw" and copy buttons.
 
     `Minilab 1 <https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1_solution.zip>`__
 
