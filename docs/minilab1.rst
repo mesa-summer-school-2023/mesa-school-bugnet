@@ -33,7 +33,7 @@ First, download the Minilab 1 work directory `here
 
 .. raw:: html
 
-    <a href="https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1.zip" target="_blank">
+    <a href="https://github.com/mesa-summer-school-2023/mesa-school-bugnet/blob/main/work_directories/work_mini1.zip" download>
      <strong>Download work directory</strong>
     </a>
 
