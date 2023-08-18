@@ -230,7 +230,7 @@ Pick a value for the initial mass from the `spreadsheet <https://docs.google.com
            integral_N = 0.0_dp
 
            do k = 1, s%nz-1
-             integral_N3 = integral_N3 + (brunt_N(k)**3/(s% rho(k)))*abs(s% rmid(k+1) - s% rmid(k)) / (s% r(k))**3
+             integral_N3 = integral_N3 + (pow(brunt_N(k),3)/(s% rho(k)))*abs(s% rmid(k+1) - s% rmid(k)) / pow(s% r(k),3)
              integral_N  = integral_N + brunt_N(k)*abs(s% rmid(k+1) - s% rmid(k)) / s% r(k)
            end do
 
@@ -238,14 +238,14 @@ Pick a value for the initial mass from the `spreadsheet <https://docs.google.com
            vals(1) = I
            omega_max = 2 * pi * s% nu_max * 1d-6
            delta_omega_g = s% x_ctrl(1)
-           Br_mean = sqrt(mu_0 * (2*pi*delta_omega_g*1d-9) * omega_max**3 / I) ! In kG.
+           Br_mean = sqrt(mu_0 * (2*pi*delta_omega_g*1d-9) * pow(omega_max,3) / I) ! In kG.
            vals(2) = Br_mean
-           Delta_Pi1 = (2._dp*pi**2)/integral_N / (sqrt(2._dp))
+           Delta_Pi1 = (2._dp*pow(pi,2))/integral_N / (sqrt(2._dp))
            vals(3) = Delta_Pi1
            write(*,*) 'Br_mean [kG] = ', Br_mean, 'Delta_Pi1 [s] = ', Delta_Pi1, 'nu_max [uHz] = ', s% nu_max, 'delta_nu [uHz]', s% delta_nu,   'I = ', I
            Delta_Pi1_obs = s% x_ctrl(2)
            nu_max_obs    = s% x_ctrl(3)
-           chi2 = (Delta_Pi1 - Delta_Pi1_obs)**2 + (s% nu_max - nu_max_obs)**2
+           chi2 = pow(Delta_Pi1 - Delta_Pi1_obs, 2) + pow(s% nu_max - nu_max_obs, 2)
            write(*,*) 'chi2', chi2
 
            deallocate(brunt_N)
