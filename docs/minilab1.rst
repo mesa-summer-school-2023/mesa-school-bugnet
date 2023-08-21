@@ -73,7 +73,13 @@ Because the final objective is to compare with observations, we have to also tun
 
 This defines how the surface pressure and temperature are computed. We are using the Eddington grey relation, about which you can found more information `here <https://docs.mesastar.org/en/latest/atm/t-tau.html>`__.
 
-We can now compile the code, with
+When starting from with a repository created by someone else, it is good practice to make sure any compiled files are removed by executing the ``clean`` script
+
+.. code-block:: console
+
+    ./clean
+
+This is in order to avoid conflict during the compilation of the code. Once this is done you can now compile the code, with
 
 .. code-block:: console
 
