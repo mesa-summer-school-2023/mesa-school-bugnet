@@ -216,6 +216,16 @@ You can edit the ``gyre_mix.in`` to change the range (and units of the range) of
 
     If you plan to use GYRE for your science, it is good to know that there is a `support forum <http://user.astro.wisc.edu/~townsend/gyre-forums/>`__ where you can find answers to errors or post a question yourself.
 
+.. warning::
+
+    In the call to
+
+    .. code-block:: fortran
+
+       call star_get_pulse_data(id, 'GYRE', .FALSE., .TRUE., .TRUE., global_data, point_data, ierr)
+
+    the booleans stand for ``add_center_point``, ``keep_surface_point``, ``add_atmosphere``, in that order. If you change the values of these controls in the GYRE inlist, it will not have any effect.
+
 Exercise 2: Mode inertia
 --------
 
