@@ -190,13 +190,13 @@ Now that we have set up GYRE, it is ready to run during a MESA run, the last thi
     x_logical_ctrl(1) = .true.
 
 in the ``inlist_project`` file.
-Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`` and start running the model with the usual command ``./rn``. At some point during the run, the terminal should print something like
+Then, recompile MESA with ``./mk`` to include changes made in ``run_star_extras`` and start running the model with the usual command ``./rn``. When the model is sufficiently evolved and mixed modes are excited in the star, GYRE will start to compute the eigenmodes of the model (this can take a few minutes). Here we have set GYRE to start running when :math:`\log T_{\rm eff} < 3.7`. At some point during the run, the terminal should print something like
 
 .. code-block:: console
 
     Found mode: index, l, m, n_p, n_g, E_norm, nu = 130 1 0 3 82 -79 2.285E-02 125.57
 
-The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes (which is after :math:`\log T_{\rm eff} < 3.7`), you can stop the run using ``Ctrl+C``. GYRE should be called every 2 steps.
+The last variable ``nu`` is the frequency of the corresponding mode. Once GYRE has computed several modes, you can stop the run using ``Ctrl+C``. GYRE should be called every 2 steps.
 
 You can edit the ``gyre_mix.in`` to change the range (and units of the range) of frequencies of the modes computed by GYRE. To do so change the parameters in ``&scan``
 
