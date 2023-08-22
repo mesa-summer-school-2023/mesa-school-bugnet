@@ -142,7 +142,7 @@ Next, in order to run GYRE we have added a subroutine ``run_gyre`` at the end of
 
       ! Pass model data to GYRE
 
-      call star_get_pulse_data(id, 'GYRE', .FALSE., .TRUE., .FALSE., &
+      call star_get_pulse_data(id, 'GYRE', .FALSE., .TRUE., .TRUE., &
           global_data, point_data, ierr)
       if (ierr /= 0) then
           print *,'Failed when calling star_get_pulse_data'
