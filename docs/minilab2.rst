@@ -1,7 +1,7 @@
 Minilab 2: Rotation and its effect on stellar pulsations
 ===================================
 
-Now that we have MESA and GYRE running, we want to investigate the impact of rotation. All stars rotate - however, describing how rotation impacts the structure and evolution of a star is a complicated business. Rotation induces two major changes to stellar evolution calculations. First, it introduces a new mechanism for transporting angular momentum throughout the star, and second it introduces a new mechanism for transporting chemicals throughout a star. In this Minilab, we want to investigate how we can use MESA to incorporate rotation in our stellar models and how different implementations modify the structure, and hence, the asteroseismic signature of a typical red giant. We will follow two cases: 1) Where we impose a constant viscosity to approximate rigid rotation, and 2) where we use a physical approach to compute the efficiency of AM trasnport, both for a rotation rate at the zero-age main-sequence (ZAMS) of 20\% the critical rotation rate. Both of these will require modifications to the standard inlist that we will follow below.
+Now that we have MESA and GYRE running, we want to investigate the impact of rotation. All stars rotate - however, describing how rotation impacts the structure and evolution of a star is a complicated business. Rotation induces two major changes to stellar evolution calculations. First, it introduces a new mechanism for transporting angular momentum throughout the star, and second it introduces a new mechanism for transporting chemicals throughout a star. In this Minilab, we want to investigate how we can use MESA to incorporate rotation in our stellar models and how different implementations modify the structure, and hence, the asteroseismic signature of a typical red giant. We will follow two cases: 1) Where we impose a constant viscosity to approximate rigid rotation, and 2) where we use a physical approach to compute the efficiency of angular momentum (AM) transport, both for a rotation rate at the zero-age main-sequence (ZAMS) of 20\% the critical rotation rate. Both of these will require modifications to the standard inlist that we will follow below.
 
 
 Exercise 0: Setup
@@ -13,7 +13,7 @@ We start this minilab from a work directory that you can download `here
 Exercise 1: Uniform rotation
 --------
 
-Asteroseismology of red giants (RG) has taught us that angular momentum (AM) takes place in stars, but the theory of AM is not able to explain all observations. Generally, AM transport is treated by a combination of advective and diffusive processes (and possibly mechanisms like internal gravity waves generated at the convective core boundary).
+Asteroseismology of red giants (RG) has taught us that AM takes place in stars, but the theory of AM is not able to explain all observations. Generally, AM transport is treated by a combination of advective and diffusive processes (and possibly mechanisms like internal gravity waves generated at the convective core boundary).
 In MESA, the transport of AM is done in a fully diffusive way by solving the following equation with rotation profile :math:`\Omega(m)` (with :math:`m` the mass coordinate),
 
 .. math::
