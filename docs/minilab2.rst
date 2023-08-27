@@ -92,7 +92,7 @@ In the next step, we will be passing the stellar profiles to GYRE. The following
     pulse_data_format = 'GYRE'
 
 
-Now, we will make the changes to the GYRE inlist ``gyre_mix.in``.
+Now, we will make the changes to the GYRE inlist ``gyre_mix_minilab2.in``.
 In the GYRE inlist, we set
 
 .. code-block:: console
