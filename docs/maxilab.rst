@@ -112,7 +112,7 @@ If your model has a high enough spatial resolution, you can assume,
     \int f(x)\,{\rm d}x \approx \sum_i f(x_i)\,\Delta x_i,
 
 where the index :math:`i` runs over the cells.
-First, define two quantities in which you store the values of the two integrals. For the summation (integral), you will have to something like
+First, define two quantities in which you store the values of the two integrals (i.e. the numerator and denominator in Eq. (2)). For the summation (integral), you will have to do something like
 
 .. code:: fortran
 
