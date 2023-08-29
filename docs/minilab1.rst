@@ -259,7 +259,7 @@ The last step for this minilab is to plot the mode inertia Eq. (1) to see what i
 The two parameters ``Profile_Panels1_xaxis_name`` and ``Profile_Panels1_xaxis_name`` define what variable are assigned to the x and y axis respectively. You can modify the displayed range of frequency by editing the ``Profile_Panels1_xmin`` and ``Profile_Panels1_xmax`` parameters.
 Now, you can start a new run with ``./rn``. A new plot should have appeared on your pgstar window. Initially, this new plot will remain blank. After some time, verify that you get the oscillations pattern presented in the figure above for the dipolar mode :math:`\ell = 1`.
 
-In your pgstar window should look like the figure below. The bottom right panel shows the mode inertia for the modes of angular degree :math:`\ell = 1`. This oscillating pattern tells us that there is a coupling between the p modes and the g modes and that GYRE predicts that the modes it computes are indeed mixed modes.
+In your pgstar window should look like the figure below. Most panels you should have already seen earlier this week. The panel in the top left shows a Kippenhahn diagram where you can see the nuclear burning regions (in red) and the convective regions (in blue) evolve over time. The bottom right panel shows the mode inertia for the modes of angular degree :math:`\ell = 1`. This oscillating pattern tells us that there is a coupling between the p modes and the g modes and that GYRE predicts that the modes it computes are indeed mixed modes.
 
 .. image:: grid_000330.png
    :alt: PGplot_mode_inertia
