@@ -23,7 +23,7 @@ with :math:`M_{\rm star}` the mass of the star, :math:`R_{\rm star}` the photosp
 Each cross corresponds to an eigenmode computed using GYRE. The modes with low inertia are mostly confined in the envelope and thus dominated by the p mode component, whereas the modes with high inertia are dominated by the g mode part. The high density of the modes in the crest of the oscillations are a consequence of the asymptotic period spacing of g modes :math:`\Delta \Pi` (already introduced on Tuesday).
 
 The main goal of today's labs is to study the red giant (RG) star KIC11515377 observed by the *Kepler* satellite from NASA and reproduce the results from `Li et al. (2022, Nature) <https://ui.adsabs.harvard.edu/abs/2022Natur.610...43L/abstract>`__.
-For this first minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run.
+For this first minilab, the aim is to evolve a model of :math:`1.4\,M_{\odot}` star from a pre-computed ZAMS model up to the Red Giant Branch (RGB) and then to modify the ``run_star_extras`` file to run GYRE on the fly during a MESA run. Throughout these labs, tips are often provided just *below* the task.
 
 Exercise 0: Setup
 --------
