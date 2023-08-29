@@ -117,7 +117,7 @@ In this minilab, we will run GYRE stand-alone like you have done during Tuesday'
 
     $GYRE_DIR/bin/gyre gyre_mix_minilab2.in
 
-To have a quick inspection of the GYRE summary file, we will use the online `MESA explorer <https://billwolf.space/mesa-explorer/>`__ designed by Bill Wolf. Upload your summary file, and plot ``n_pg`` (the radial order) vs. ``Re(freq)`` (the real part of the mode frequency).
+To have a quick inspection of the GYRE summary file, we will use the online `MESA explorer <https://billwolf.space/mesa-explorer/>`__ designed by Bill Wolf. Upload your summary file, and plot ``n_pg`` (the radial order) vs. ``Re(freq)`` (the real part of the mode frequency). Plot the data in a scatter plot.
 
 
 Exercise 2: Physical approach
