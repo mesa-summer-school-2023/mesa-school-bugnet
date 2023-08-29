@@ -122,7 +122,7 @@ First, define two quantities in which you store the values of the two integrals 
     end do
 
 where ``delta(k)`` is the function we want to integrate (:math:`f(x_i) \Delta x_i`). Remember :math:`k=1` is the outermost cell.
-In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals.
+In MESA, there are quantities that are defined at the mass centre of the cell, and there are quantities that are defined at the edge of the cell. Think about this when you compute the integrals. Remember you can do :math:`x^n` with ``pow(x,n)``.
 
 .. tip::
 
