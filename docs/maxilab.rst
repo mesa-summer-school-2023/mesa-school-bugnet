@@ -96,7 +96,7 @@ Compute :math:`N` from the values of :math:`N^2` defined in MESA, but set negati
 
 .. code:: console
 
-    sqrt(max(0._dp, s% brunt_N2))
+    brunt_N = sqrt(max(0._dp, s% brunt_N2))
 
 In Fortran, the function ``max()`` will element-wise return the larger element of the two arguments. The ``_dp`` indicates we are dealing with double precision here.
 At the end of the subroutine, you can deallocate the array to free up memory.
