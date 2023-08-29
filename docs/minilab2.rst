@@ -152,5 +152,5 @@ Run MESA again with this other way of AM transport. Do you see any changes in th
 In the mixing panel of ``PGstar``, you should also be able to see the predicted viscosity (or diffusion coefficient) for each of the six processes.
 However, because we set ``am_D_mix_factor = 0`` in ``&controls``, we only study the effect of AM transport and not on the transport of chemical elements.
 
-Run GYRE again at the same age (again, remember to provide a different name for the summary file!), and compare the pulsations. Upload also this summary file to `MESA explorer <https://billwolf.space/mesa-explorer/>`__ and toggle between the two.
+Run GYRE again at the same age (again, remember to provide a different name for the summary file!), and compare the pulsations. Upload also this summary file to `MESA explorer <https://billwolf.space/mesa-explorer/>`__ and toggle between the two. You can fix the ranges of the x- and y-axis to make it easier to see the differences. 
 Could asteroseismology possibly distinguish between these two cases?
