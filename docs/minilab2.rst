@@ -156,6 +156,10 @@ However, because we set ``am_D_mix_factor = 0`` in ``&controls``, we only study 
 Run GYRE again at the same age (again, remember to provide a different name for the summary file!), and compare the pulsations. Upload also this summary file to `MESA explorer <https://billwolf.space/mesa-explorer/>`__ and toggle between the two. You can fix the ranges of the x- and y-axis to make it easier to see the differences. Assuming we start with a certain initial rotation frequency, the final rotation profile at the point where we stop the models will depend on our choice of the treatment for AM transport. 
 Are the final rotation profiles for the two cases different enough to observe with asteroseismology?
 
-.. admonition:: Bonus exercise
+.. admonition:: Bonus exercise 1
+
+    Try computing also the modes for :math:`m=-1` and :math:`m=1` (:math:`\ell=1`).
+
+.. admonition:: Bonus exercise 2
 
     Try enabling only a subset of the hydrodynamical processes and run again. Which ones are the most important?
