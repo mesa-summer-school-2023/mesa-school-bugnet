@@ -117,6 +117,7 @@ In this minilab, we will run GYRE stand-alone like you have done during Tuesday'
 
     $GYRE_DIR/bin/gyre gyre_mix_minilab2.in
 
+You can comment out the :math:`\ell = 2` mode in the inlist. If you feel bold, you can try increasing ``freq_min``. 
 To have a quick inspection of the GYRE summary file, we will use the online `MESA explorer <https://billwolf.space/mesa-explorer/>`__ designed by Bill Wolf. Upload your summary file, and plot ``n_pg`` (the radial order) vs. ``Re(freq)`` (the real part of the mode frequency). Plot the data in a scatter plot.
 
 
